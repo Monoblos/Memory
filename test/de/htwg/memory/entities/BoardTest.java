@@ -61,7 +61,7 @@ public class BoardTest {
 		String s = filledBoard.toString();
 		filledBoard.pickCard(1, 1);
 		String c = filledBoard.toString();
-		assertNotEquals(s, c);
+		assertFalse(s.equals(c));
 	}
 	
 	@Test

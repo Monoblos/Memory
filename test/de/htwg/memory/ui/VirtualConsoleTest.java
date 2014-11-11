@@ -34,7 +34,7 @@ public class VirtualConsoleTest {
 	public void testClear() {
 		assertEquals("", vc.getCurrentText());
 		vc.print("a");
-		assertNotEquals("", vc.getCurrentText());
+		assertFalse("".equals(vc.getCurrentText()));
 		vc.clear();
 		assertEquals("", vc.getCurrentText());
 	}

@@ -32,7 +32,10 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 	}
 	public TUI(MemoryCard[] memoryCards, int width, int height) {
 		this.virtualConsole = null;
-		this.board = new Board(memoryCards.clone(), width, height);
+		if (memoryCards != null)
+			this.board = new Board(memoryCards.clone(), width, height);
+		else
+			this.board = new Board(null, width, height);
 		this.board.addListener(this);
 		this.game = null;
 		this.continueRunning = false;

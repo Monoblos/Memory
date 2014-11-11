@@ -86,9 +86,9 @@ public class MemoryCardTest {
 		memoryCard.setVisible(false);
 		memoryCard.setSolved(true);
 		String s = memoryCard.toString();
-		assertNotEquals(n, v);
-		assertNotEquals(n, s);
-		assertEquals(s, v);
+		assertFalse(n.equals(v));
+		assertFalse(n.equals(s));
+		assertTrue(s.equals(v));
 	}
 	
 	@After
