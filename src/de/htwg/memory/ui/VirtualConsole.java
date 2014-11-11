@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -11,9 +13,9 @@ import javax.swing.JTextArea;
 public class VirtualConsole {
 	private static final class ForKeyWaiter implements KeyListener {
 		public static final class Synchronizer {
-			public boolean ready = false;
+			private boolean ready = false;
 		}
-		public final Synchronizer synchronizer = new Synchronizer();
+		private final Synchronizer synchronizer = new Synchronizer();
 
 		public void arm() {
 			if (synchronizer.ready) {
@@ -61,8 +63,9 @@ public class VirtualConsole {
 	}
 
 	public void kill() {
-		for (KeyListener l : text.getKeyListeners())
+		for (KeyListener l : text.getKeyListeners()) {
 			text.removeKeyListener(l);
+		}
 		text = null;
 		frame.setVisible(false);
 		frame = null;
@@ -95,15 +98,17 @@ public class VirtualConsole {
 		try {
 			Thread.sleep(Long.valueOf(millis));
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
 		}
 	}
 
 	public void waitForKey() {
 		KeyListener[] oldListeners = text.getKeyListeners();
-		for (KeyListener l : oldListeners)
-			if (l != k)
+		for (KeyListener l : oldListeners) {
+			if (l != k) {
 				text.removeKeyListener(l);
+			}
+		}
 		
 		k.arm();
 		synchronized (k.synchronizer) {
@@ -111,15 +116,17 @@ public class VirtualConsole {
 				try {
 					k.synchronizer.wait();
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
 				}
 			}
 		}
 
 		System.out.println("Wait Nr. " + ++waitCounter);
-		for (KeyListener l : oldListeners)
-			if (l != k)
+		for (KeyListener l : oldListeners) {
+			if (l != k) {
 				text.addKeyListener(l);
+			}
+		}
 	}
 
 	public void addKeyListener(KeyListener l) {

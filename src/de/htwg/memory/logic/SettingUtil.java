@@ -1,15 +1,15 @@
 package de.htwg.memory.logic;
 
-public class SettingUtil {
+public final class SettingUtil {
 	private SettingUtil() { }
 	
-	private static String HIDDEN_VALUE = "?";
-	private static int NUMBER_OF_CARDS_TO_MATCH = 2;
+	private static String hiddenValue = "?";
+	private static int numberOfCardsToMatch = 2;
 	
 	public static String getHiddenValue() {
-		return HIDDEN_VALUE;
+		return hiddenValue;
 	}
 	public static int getNumberOfCardsToMatch() {
-		return NUMBER_OF_CARDS_TO_MATCH;
+		return numberOfCardsToMatch;
 	}
 }

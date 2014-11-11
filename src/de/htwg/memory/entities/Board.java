@@ -63,53 +63,67 @@ public class Board {
 		}
 		int matchMade = updateMatchings();
 		if (matchMade == 1) {
-			for (BoardEventListener l : eventListeners)
+			for (BoardEventListener l : eventListeners) {
 				l.matchMade();
-			if (isFinished())
-				for (BoardEventListener l : eventListeners)
+			}
+			if (isFinished()) {
+				for (BoardEventListener l : eventListeners) {
 					l.win();
+				}
+			}
 		}
 		return true;
 	}
 	public boolean hastVisibleCard() {
 		boolean hastVisible = false;
-		for (int i = 0; i < memoryCards.length; i++)
-			for (int j = 0; j < memoryCards[i].length; j++)
+		for (int i = 0; i < memoryCards.length; i++) {
+			for (int j = 0; j < memoryCards[i].length; j++) {
 				hastVisible |= memoryCards[i][j].isVisible() && !memoryCards[i][j].isSolved();
+			}
+		}
 		return hastVisible;
 	}
 	public boolean isFinished() {
 		boolean isFinished = true;
-		for (int i = 0; i < memoryCards.length && isFinished; i++)
-			for (int j = 0; j < memoryCards[i].length && isFinished; j++)
+		for (int i = 0; i < memoryCards.length && isFinished; i++) {
+			for (int j = 0; j < memoryCards[i].length && isFinished; j++) {
 				isFinished &= memoryCards[i][j].isSolved();
+			}
+		}
 		return isFinished;
 	}
 	private int updateMatchings() {
 		MemoryCard foundCards[] = new MemoryCard[SettingUtil.getNumberOfCardsToMatch()];
-		for (int i = 0; i < memoryCards.length; i++)
-			for (int j = 0; j < memoryCards[i].length; j++)
-				if (memoryCards[i][j].isVisible() && !memoryCards[i][j].isSolved())
-					for (int m = 0; ; m++)
+		for (int i = 0; i < memoryCards.length; i++) {
+			for (int j = 0; j < memoryCards[i].length; j++) {
+				if (memoryCards[i][j].isVisible() && !memoryCards[i][j].isSolved()) {
+					for (int m = 0; ; m++) {
 						if (foundCards[m] == null) {
 							foundCards[m] = memoryCards[i][j];
 							break;
 						}
+					}
+				}
+			}
+		}
 		
 		if (foundCards[foundCards.length - 1] == null) {
 			return 0;
 		}
 		
 		boolean allMatch = true;
-		for (int i = 1; i < foundCards.length; i++)
+		for (int i = 1; i < foundCards.length; i++) {
 			allMatch &= foundCards[0].compareTo(foundCards[i]) == 0;
+		}
 		if (allMatch) {
-			for (int i = 0; i < foundCards.length; i++)
+			for (int i = 0; i < foundCards.length; i++) {
 				foundCards[i].setSolved(true);
+			}
 		}
 		
-		if (!allMatch)
+		if (!allMatch) {
 			hideAll();
+		}
 		return allMatch ? 1 : -1;
 	}
 	
@@ -131,13 +145,17 @@ public class Board {
 	}
 	
 	public void hideAll() {
-		for (BoardEventListener l : eventListeners)
+		for (BoardEventListener l : eventListeners) {
 			l.beforeBoardReset();
-		for (int i = 0; i < memoryCards.length; i++)
-			for (int j = 0; j < memoryCards[i].length; j++)
+		}
+		for (int i = 0; i < memoryCards.length; i++) {
+			for (int j = 0; j < memoryCards[i].length; j++) {
 				memoryCards[i][j].setVisible(false);
-		for (BoardEventListener l : eventListeners)
+			}
+		}
+		for (BoardEventListener l : eventListeners) {
 			l.afterBoardReset();
+		}
 	}
 	
 	@Override

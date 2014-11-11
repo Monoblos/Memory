@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import de.htwg.memory.entities.Board;
 import de.htwg.memory.entities.MemoryCard;
@@ -15,9 +17,9 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 	private Thread game;
 	private Boolean continueRunning;
 	private int selectedRow;
-	int cardToPick;
-    final List<Character> holder = new LinkedList<>();
-	int countRounds;
+	private int cardToPick;
+	private final List<Character> holder = new LinkedList<>();
+	private int countRounds;
 	
 	public TUI() {
 		this(null);
@@ -30,7 +32,7 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 	}
 	public TUI(MemoryCard[] memoryCards, int width, int height) {
 		this.virtualConsole = null;
-		this.board = new Board(memoryCards, width, height);
+		this.board = new Board(memoryCards.clone(), width, height);
 		this.board.addListener(this);
 		this.game = null;
 		this.continueRunning = false;
@@ -73,7 +75,7 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 							try {
 								holder.wait();
 							} catch (InterruptedException e) {
-								e.printStackTrace();
+								Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
 							}
 						
 						char lastKey = holder.remove(0);
@@ -112,7 +114,7 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
 			}
 		}
 		

@@ -18,4 +18,9 @@ public class UtilTest {
 	  constructor.setAccessible(true);
 	  constructor.newInstance();
 	}
+	
+	@Test
+	public void testExists() {
+		assertTrue(Util.exits());
+	}
 }

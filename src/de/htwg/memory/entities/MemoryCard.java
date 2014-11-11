@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import de.htwg.memory.logic.SettingUtil;
 
-public class MemoryCard implements Comparable<MemoryCard> {
+public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 	private int cardValue;
 	private Image picture;
 	private boolean visible;
@@ -66,8 +66,9 @@ public class MemoryCard implements Comparable<MemoryCard> {
 	}
 	@Override
 	public String toString() {
-		if (visible || solved)
+		if (visible || solved) {
 			return " " + String.valueOf(cardValue) + " ";
+		}
 		return "(" + String.valueOf(cardValue) + ")";
 		//return SettingUtil.getHiddenValue();
 	}

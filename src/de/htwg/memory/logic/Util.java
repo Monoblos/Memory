@@ -1,6 +1,9 @@
 package de.htwg.memory.logic;
 
-public class Util {
+public final class Util {
 	private Util() { }
 
+	public static boolean exits() {
+		return true;
+	}
 }
