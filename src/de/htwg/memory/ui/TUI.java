@@ -71,12 +71,13 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 			public void run() {
 				while (continueRunning) {
 					synchronized (holder) {
-						while (holder.isEmpty())
+						while (holder.isEmpty()) {
 							try {
 								holder.wait();
 							} catch (InterruptedException e) {
 								Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
 							}
+						}
 						
 						char lastKey = holder.remove(0);
 						int key;

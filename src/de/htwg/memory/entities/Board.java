@@ -13,18 +13,19 @@ public class Board {
 	private List<BoardEventListener> eventListeners;
 	
 	public Board(MemoryCard[] memoryCards, int width, int height) {
+		MemoryCard[] cards = memoryCards;
 		this.memoryCards = new MemoryCard[width][height];
 		cardCount = 0;
 		
-		if(memoryCards == null) {
-			memoryCards = new MemoryCard[width * height / 2];
+		if(cards == null) {
+			cards = new MemoryCard[width * height / 2];
 			for (int i = 0; i < width * height / 2; i++) {
-				memoryCards[i] = new MemoryCard(i + 1);
+				cards[i] = new MemoryCard(i + 1);
 			}
 		}
 		
-		for (int i = 0; i < width * height / SettingUtil.getNumberOfCardsToMatch() && i < memoryCards.length; i++) {
-			addCardPair(memoryCards[i]);
+		for (int i = 0; i < width * height / SettingUtil.getNumberOfCardsToMatch() && i < cards.length; i++) {
+			addCardPair(cards[i]);
 		}
 		eventListeners = new LinkedList<>();
 	}
@@ -46,11 +47,13 @@ public class Board {
 		return memoryCards.length;
 	}
 	
-	public void addCardPair(MemoryCard card) {
-		if (card == null)
+	public final void addCardPair(MemoryCard card) {
+		if (card == null) {
 			throw new NullPointerException("Can't add null Memory Cards");
-		if (cardCount >= getWidth() * getHeight())
+		}
+		if (cardCount >= getWidth() * getHeight()) {
 			throw new IndexOutOfBoundsException("Board has reached maximum number of cards");
+		}
 		for (int i = 0; i < SettingUtil.getNumberOfCardsToMatch(); i++) {
 			this.memoryCards[cardCount / memoryCards[0].length][cardCount % memoryCards[0].length] = card.clone();
 			cardCount++;
