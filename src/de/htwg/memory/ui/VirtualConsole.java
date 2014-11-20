@@ -29,10 +29,10 @@ public class VirtualConsole {
 		}
 
 		@Override
-		public void keyReleased(KeyEvent e) {}
+		public void keyReleased(KeyEvent e) { e.consume(); }
 
 		@Override
-		public void keyTyped(KeyEvent e) {}
+		public void keyTyped(KeyEvent e) { e.consume(); }
 
 		private void handle(KeyEvent e) {
 			synchronized (synchronizer) {
@@ -48,7 +48,6 @@ public class VirtualConsole {
 	private JFrame frame;
 	private JTextArea text;
 	private ForKeyWaiter k = new ForKeyWaiter();
-	private int waitCounter = 0;
 
 	public VirtualConsole() {
 		frame = new JFrame();
@@ -115,13 +114,13 @@ public class VirtualConsole {
 			while (!k.synchronizer.ready) {
 				try {
 					k.synchronizer.wait();
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
 				}
 			}
 		}
 
-		System.out.println("Wait Nr. " + ++waitCounter);
 		for (KeyListener l : oldListeners) {
 			if (l != k) {
 				text.addKeyListener(l);
