@@ -70,6 +70,6 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 			return " " + String.valueOf(cardValue) + " ";
 		}
 		return "(" + String.valueOf(cardValue) + ")";
-		//return SettingUtil.getHiddenValue();
+//		return SettingUtil.getHiddenValue();
 	}
 }

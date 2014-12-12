@@ -114,7 +114,6 @@ public class VirtualConsole {
 			while (!k.synchronizer.ready) {
 				try {
 					k.synchronizer.wait();
-					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
 				}

@@ -85,6 +85,11 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 			try {
 				key = Integer.valueOf(String.valueOf(lastKey)) - 1;
 			} catch (NumberFormatException e) {
+				if (lastKey == KeyEvent.VK_BACK_SPACE) {
+					if(roleBack()) {
+						continue;
+					}
+				}
 				virtualConsole.println("Invalid input: '" + lastKey + "'");
 				continue;
 			}
@@ -119,6 +124,14 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 			virtualConsole.println("Index out of range: '" + (key + 1) + "'");
 			return false;
 		}
+		return true;
+	}
+	
+	private boolean roleBack() {
+		if (selectedRow == -1) {
+			return false;
+		}
+		selectedRow = -1;
 		return true;
 	}
 	
