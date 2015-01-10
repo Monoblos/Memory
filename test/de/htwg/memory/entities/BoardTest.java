@@ -49,7 +49,7 @@ public class BoardTest {
 		filledBoard.addListener(l);
 		for (int i = 0; !filledBoard.isFinished(); i++) {
 			if (i % SettingUtil.getNumberOfCardsToMatch() != 0) {
-				assertTrue(filledBoard.hastVisibleCard());
+				assertTrue(filledBoard.hasVisibleCard());
 			}
 			while(!filledBoard.pickCard(r.nextInt(4), r.nextInt(4)));
 		}

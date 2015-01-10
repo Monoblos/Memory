@@ -20,7 +20,7 @@ public class UtilTest {
 	}
 	
 	@Test
-	public void testExists() {
-		assertTrue(Util.exits());
+	public void testCreateImageFromString() {
+		assertNotNull(Util.createImageFromString("?"));
 	}
 }

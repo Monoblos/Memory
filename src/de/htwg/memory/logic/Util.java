@@ -1,11 +1,11 @@
 package de.htwg.memory.logic;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -14,19 +14,26 @@ import de.htwg.memory.entities.Board;
 import de.htwg.memory.entities.MemoryCard;
 
 public final class Util {
-	MemoryCard[] memCard;
-	int width, height = 0;
-	Board board;
 	
 	private Util() { }
 
-	public static boolean exits() {
-		return true;
+	public static Image createImageFromString(String s) {
+		return createImageFromString(s, Color.BLACK, Color.WHITE);
+	}
+
+	public static Image createImageFromString(String s, Color bg, Color fc) {
+		BufferedImage i = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = i.createGraphics();
+		g.setColor(bg);
+		g.fillRect(0, 0, 100, 100);
+		g.setColor(fc);
+		g.setFont(g.getFont().deriveFont(50f));
+		g.drawChars(s.toCharArray(), 0, s.length(), 25, 75);
+		return i;
 	}
 	
-	public Board readCards(File[] img, ActionListener a){
-		memCard = null;
-		board = null;
+	public static Board readCards(File[] img, ActionListener a){
+		MemoryCard[] memCard = new MemoryCard[img.length];
 		BufferedImage image = null;
 		if(img.length <= 1){
 			System.out.println("Es wurden zu wenig Karten ausgewählt");
@@ -39,7 +46,7 @@ public final class Util {
 					System.out.println("Bilder konnten nicht eingelesen werden!");
 				}
 			}
-		return board = new Board(memCard, (int)(Math.round(Math.sqrt(img.length))), (int)(Math.round(Math.sqrt(img.length))));
+		return new Board(memCard, (int)(Math.round(Math.sqrt(img.length))), (int)(Math.round(Math.sqrt(img.length))));
 		
 	}
 }

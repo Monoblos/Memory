@@ -1,14 +1,17 @@
 package de.htwg.memory.entities;
 
+import java.awt.Color;
 import java.awt.Image;
 
 import de.htwg.memory.logic.SettingUtil;
+import de.htwg.memory.logic.Util;
 
 public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 	private int cardValue;
 	private Image picture;
 	private boolean visible;
 	private boolean solved;
+	private Board board;
 	
 	public MemoryCard() {
 		this(0);
@@ -33,7 +36,10 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 		this.picture = value;
 	}
 	public Image getPicture() {
-		return this.picture;
+		if (isVisible())
+			return Util.createImageFromString(this.toString(), Color.WHITE, Color.BLUE);
+		else
+			return SettingUtil.getHiddenImage();
 	}
 	
 	public boolean isVisible() {
@@ -56,6 +62,15 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 		this.solved = solved;
 	}
 	
+	public void registerInBoard(Board b) {
+		board = b;
+	}
+	public void pick() {
+		if (board != null)
+			board.pickCard(this);
+		System.out.println("Board looks like this:\n" + board);
+	}
+	
 	@Override
 	public int compareTo(MemoryCard o) {
 		return this.getCardValue() - o.getCardValue();
@@ -69,7 +84,6 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 		if (visible || solved) {
 			return " " + String.valueOf(cardValue) + " ";
 		}
-		return "(" + String.valueOf(cardValue) + ")";
-//		return SettingUtil.getHiddenValue();
+		return SettingUtil.getHiddenValue();
 	}
 }
