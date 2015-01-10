@@ -1,5 +1,7 @@
 package de.htwg.memory.entities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -18,8 +20,8 @@ public class Board {
 		cardCount = 0;
 		
 		if(cards == null) {
-			cards = new MemoryCard[width * height / 2];
-			for (int i = 0; i < width * height / 2; i++) {
+			cards = new MemoryCard[width * height / SettingUtil.getNumberOfCardsToMatch()];
+			for (int i = 0; i < width * height / SettingUtil.getNumberOfCardsToMatch(); i++) {
 				cards[i] = new MemoryCard(i + 1);
 			}
 		}
@@ -51,17 +53,20 @@ public class Board {
 		if (card == null) {
 			throw new NullPointerException("Can't add null Memory Cards");
 		}
-		if (cardCount >= getWidth() * getHeight()) {
+		if (cardCount + SettingUtil.getNumberOfCardsToMatch() > getWidth() * getHeight()) {
 			throw new IndexOutOfBoundsException("Board has reached maximum number of cards");
 		}
 		for (int i = 0; i < SettingUtil.getNumberOfCardsToMatch(); i++) {
-			this.memoryCards[cardCount / memoryCards[0].length][cardCount % memoryCards[0].length] = card.clone();
+			this.memoryCards[cardCount / getWidth()][cardCount % getWidth()] = card.clone();
 			cardCount++;
 		}
 	}
 	
 	public boolean pickCard(int x, int y) {
-		if (!memoryCards[x][y].setVisible(true)) {
+		return pickCard(memoryCards[x][y]);
+	}
+	public boolean pickCard(MemoryCard c) {
+		if (!c.setVisible(true)) {
 			return false;
 		}
 		int matchMade = updateMatchings();
@@ -77,14 +82,14 @@ public class Board {
 		}
 		return true;
 	}
-	public boolean hastVisibleCard() {
-		boolean hastVisible = false;
+	public boolean hasVisibleCard() {
+		boolean hasVisible = false;
 		for (int i = 0; i < memoryCards.length; i++) {
 			for (int j = 0; j < memoryCards[i].length; j++) {
-				hastVisible |= memoryCards[i][j].isVisible() && !memoryCards[i][j].isSolved();
+				hasVisible |= memoryCards[i][j].isVisible() && !memoryCards[i][j].isSolved();
 			}
 		}
-		return hastVisible;
+		return hasVisible;
 	}
 	public boolean isFinished() {
 		boolean isFinished = true;
@@ -95,6 +100,10 @@ public class Board {
 		}
 		return isFinished;
 	}
+	/**
+	 * 
+	 * @return 0 if not enougth cards for a match, 1 if a match was made, -1 if match is invalid.
+	 */
 	private int updateMatchings() {
 		MemoryCard foundCards[] = new MemoryCard[SettingUtil.getNumberOfCardsToMatch()];
 		for (int i = 0; i < memoryCards.length; i++) {
@@ -103,6 +112,7 @@ public class Board {
 					for (int m = 0; ; m++) {
 						if (foundCards[m] == null) {
 							foundCards[m] = memoryCards[i][j];
+							
 							break;
 						}
 					}
@@ -122,12 +132,11 @@ public class Board {
 			for (int i = 0; i < foundCards.length; i++) {
 				foundCards[i].setSolved(true);
 			}
+			return 1;
 		}
 		
-		if (!allMatch) {
-			hideAll();
-		}
-		return allMatch ? 1 : -1;
+		hideAll();
+		return -1;
 	}
 	
 	public void shuffle() {
@@ -140,7 +149,7 @@ public class Board {
 			int y1 = r.nextInt(memoryCards.length);
 			int x2 = r.nextInt(memoryCards[0].length);
 			int y2 = r.nextInt(memoryCards.length);
-			
+
 			MemoryCard temp = memoryCards[y1][x1];
 			memoryCards[y1][x1] = memoryCards[y2][x2];
 			memoryCards[y2][x2] = temp;
@@ -165,13 +174,20 @@ public class Board {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
-		for (int i = 0; i <memoryCards.length; i++) {
-			for (int j = 0; j < memoryCards[i].length; j++) {
+		for (int i = 0; i < getHeight(); i++) {
+			for (int j = 0; j < getWidth(); j++) {
 				sb.append(memoryCards[i][j]).append(" ");
 			}
 			sb.append("\n");
 		}
 		
 		return sb.toString();
+	}
+	
+	public Iterable<MemoryCard> getMemoryCardIterator() {
+		ArrayList<MemoryCard> forIt = new ArrayList<>();
+		for(int i = 0; i < memoryCards.length; i++)
+			forIt.addAll(Arrays.asList(memoryCards[i]));
+		return forIt;
 	}
 }

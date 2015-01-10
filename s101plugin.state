@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<structure101-builder version="1.0" format="state" vendor="headway" generated-at="Tue Nov 11 18:55:55 CET 2014">
-  <builder-settings lastConnectedTo="D:/Users/mrs/Documents/Structure101/Memory/1.0.0" includeExternals="true" diagramsTimeStamp="1415686074125" actionsTimeStamp="1415686074128" settingsCheckInterval="5000" classPath="D:\Users\mrs\Documents\GitHub\Memory\target\classes;D:\Users\mrs\Documents\GitHub\Memory\target\test-classes;D:\Users\mrs\Documents\GitHub\Memory\target\classes" compilationPath="D:\Users\mrs\Documents\GitHub\Memory\target\classes;D:\Users\mrs\Documents\GitHub\Memory\target\test-classes;D:\Users\mrs\Documents\GitHub\Memory\target\classes;D:\Programme\Eclipse\plugins\org.junit_4.11.0.v201303080030\junit.jar;D:\Programme\Eclipse\plugins\org.hamcrest.core_1.3.0.v201303031735.jar;D:\Users\mrs\.m2\repository\junit\junit\4.10\junit-4.10.jar;D:\Users\mrs\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;C:\Program Files\Java\jre7\lib\resources.jar;C:\Program Files\Java\jre7\lib\rt.jar;C:\Program Files\Java\jre7\lib\jsse.jar;C:\Program Files\Java\jre7\lib\jce.jar;C:\Program Files\Java\jre7\lib\charsets.jar;C:\Program Files\Java\jre7\lib\jfr.jar;C:\Program Files\Java\jre7\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jre7\lib\ext\dnsns.jar;C:\Program Files\Java\jre7\lib\ext\jaccess.jar;C:\Program Files\Java\jre7\lib\ext\localedata.jar;C:\Program Files\Java\jre7\lib\ext\sunec.jar;C:\Program Files\Java\jre7\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jre7\lib\ext\sunmscapi.jar;C:\Program Files\Java\jre7\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.7.0_67\bin\javaw.exe">
+<structure101-builder version="1.0" format="state" vendor="headway" generated-at="Sat Jan 10 19:48:18 CET 2015">
+  <builder-settings lastConnectedTo="D:/Users/mrs/Documents/Structure101/Memory/1.0.0" includeExternals="true" diagramsTimeStamp="1415686074125" actionsTimeStamp="1415686074128" settingsCheckInterval="5000" classPath="D:\Users\mrs\Documents\GitHub\Memory\target\classes;D:\Users\mrs\Documents\GitHub\Memory\target\test-classes;D:\Users\mrs\Documents\GitHub\Memory\target\classes" compilationPath="D:\Users\mrs\Documents\GitHub\Memory\target\classes;D:\Users\mrs\Documents\GitHub\Memory\target\test-classes;D:\Users\mrs\Documents\GitHub\Memory\target\classes;D:\Programme\Eclipse\plugins\org.junit_4.11.0.v201303080030\junit.jar;D:\Programme\Eclipse\plugins\org.hamcrest.core_1.3.0.v201303031735.jar;D:\Users\mrs\.m2\repository\junit\junit\4.10\junit-4.10.jar;D:\Users\mrs\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;C:\Program Files\Java\jre7\lib\resources.jar;C:\Program Files\Java\jre7\lib\rt.jar;C:\Program Files\Java\jre7\lib\jsse.jar;C:\Program Files\Java\jre7\lib\jce.jar;C:\Program Files\Java\jre7\lib\charsets.jar;C:\Program Files\Java\jre7\lib\jfr.jar;C:\Program Files\Java\jre7\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jre7\lib\ext\dnsns.jar;C:\Program Files\Java\jre7\lib\ext\jaccess.jar;C:\Program Files\Java\jre7\lib\ext\localedata.jar;C:\Program Files\Java\jre7\lib\ext\sunec.jar;C:\Program Files\Java\jre7\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jre7\lib\ext\sunmscapi.jar;C:\Program Files\Java\jre7\lib\ext\zipfs.jar">
     <s101plugin-properties>
       <isEnabled value="true"/>
       <onDemand value="false"/>
@@ -22,205 +22,280 @@
   <graph>
     <node st="3,t,f" id="1" rc="2" de="java/lang/NoSuchMethodException"/>
     <node st="3,t,f" id="2" rc="2" de="java/util/List"/>
-    <node st="3,t,f" id="3" rc="0" de="de/htwg/memory/logic/UtilTest" la="1415728005277"/>
-    <node st="3,t,f" id="4" rc="2" de="java/lang/Thread"/>
-    <node st="3,t,f" id="5" rc="17" de="java/lang/Object"/>
-    <node st="3,t,f" id="6" rc="0" de="de/htwg/memory/entities/MemoryCardTest" la="1415728005285"/>
+    <node st="3,t,f" id="3" rc="0" de="de/htwg/memory/logic/UtilTest" la="1420830880762"/>
+    <node st="3,t,f" id="4" rc="3" de="java/lang/Thread"/>
+    <node st="3,t,f" id="5" rc="18" de="java/lang/Object"/>
+    <node st="3,t,f" id="6" rc="0" de="de/htwg/memory/entities/MemoryCardTest" la="1415729031972"/>
     <node st="3,t,f" id="7" rc="2" de="java/awt/event/KeyEvent"/>
-    <node st="3,t,t" id="8" rc="2" de="de/htwg/memory/ui/VirtualConsole" la="1415728005238"/>
+    <node st="3,t,t" id="8" rc="2" de="de/htwg/memory/ui/VirtualConsole" la="1415728580464"/>
     <node st="3,t,f" id="9" rc="5" de="java/lang/StringBuilder"/>
     <node st="3,t,f" id="10" rc="5" de="org/junit/Before"/>
-    <node st="3,t,f" id="11" rc="1" de="java/lang/Cloneable"/>
-    <node st="3,t,f" id="12" rc="1" de="java/util/Iterator"/>
-    <node st="3,t,f" id="13" rc="1" de="java/awt/BorderLayout"/>
-    <node st="3,t,f" id="14" rc="2" de="java/lang/InstantiationException"/>
+    <node st="3,t,f" id="11" rc="2" de="java/lang/InstantiationException"/>
+    <node st="3,t,f" id="12" rc="1" de="java/awt/BorderLayout"/>
+    <node st="3,t,f" id="13" rc="1" de="java/lang/Cloneable"/>
+    <node st="3,t,f" id="14" rc="2" de="java/util/Iterator"/>
     <node st="3,t,f" id="15" rc="2" de="java/lang/reflect/Modifier"/>
     <node st="3,t,f" id="16" rc="2" de="java/lang/reflect/InvocationTargetException"/>
     <node st="3,t,f" id="17" rc="1" de="java/lang/NumberFormatException"/>
-    <node st="3,t,t" id="18" rc="3" de="de/htwg/memory/logic/SettingUtil" la="1415728005255"/>
-    <node st="3,t,f" id="19" rc="2" de="java/awt/Image"/>
-    <node st="3,t,f" id="20" rc="1" de="java/awt/Dimension"/>
-    <node st="3,t,f" id="21" rc="1" de="java/lang/Long"/>
-    <node st="3,t,f" id="22" rc="2" de="java/util/Random"/>
-    <node st="3,t,f" id="23" rc="2" de="java/util/logging/Level"/>
-    <node st="3,t,t" id="24" rc="2" de="de/htwg/memory/ui/TUI" la="1415728005249"/>
-    <node st="3,t,f" id="25" rc="6" de="org/junit/Assert"/>
-    <node st="3,t,f" id="26" rc="2" de="java/util/LinkedList"/>
-    <node st="3,t,f" id="27" rc="0" de="de/htwg/memory/ui/VirtualConsoleTest" la="1415728005270"/>
-    <node st="3,t,f" id="28" rc="1" de="java/awt/Component"/>
-    <node st="3,t,f" id="29" rc="2" de="javax/swing/ImageIcon"/>
-    <node st="3,t,f" id="30" rc="1" de="java/lang/Comparable"/>
-    <node st="3,t,f" id="31" rc="1" de="java/awt/LayoutManager"/>
-    <node st="3,t,t" id="32" rc="4" de="de/htwg/memory/logic/BoardEventListener" la="1415728005258"/>
-    <node st="3,t,f" id="33" rc="2" de="java/util/logging/Logger"/>
-    <node st="3,t,f" id="34" rc="2" de="java/lang/IndexOutOfBoundsException"/>
-    <node st="3,t,t" id="35" rc="0" de="de/htwg/memory/main/Main" la="1415728005251"/>
-    <node st="3,t,f" id="36" rc="10" de="java/lang/String"/>
-    <node st="3,t,f" id="37" rc="0" de="de/htwg/memory/logic/SettingUtilTest" la="1415728005280"/>
-    <node st="3,t,t" id="38" rc="2" de="de/htwg/memory/entities/Board" la="1415728005268"/>
-    <node st="3,t,f" id="39" rc="0" de="de/htwg/memory/logic/BoardEventAdapterTest" la="1415728005282"/>
-    <node st="3,t,f" id="40" rc="2" de="java/awt/event/KeyListener"/>
-    <node st="3,t,f" id="41" rc="8" de="org/junit/Test"/>
-    <node st="3,t,f" id="42" rc="2" de="java/lang/NullPointerException"/>
-    <node st="3,t,f" id="43" rc="1" de="java/lang/Runnable"/>
-    <node st="3,t,f" id="44" rc="1" de="java/lang/CloneNotSupportedException"/>
-    <node st="3,t,t" id="45" rc="2" de="de/htwg/memory/logic/BoardEventAdapter" la="1415728005260"/>
-    <node st="3,t,f" id="46" rc="2" de="java/lang/IllegalAccessException"/>
-    <node st="3,t,f" id="47" rc="1" de="java/lang/Character"/>
-    <node st="3,t,f" id="48" rc="1" de="java/lang/Boolean"/>
-    <node st="3,t,f" id="49" rc="1" de="javax/swing/JTextArea"/>
-    <node st="3,t,f" id="50" rc="1" de="javax/swing/text/Document"/>
-    <node st="3,t,t" id="51" rc="4" de="de/htwg/memory/entities/MemoryCard" la="1415728005264"/>
-    <node st="3,t,f" id="52" rc="0" de="de/htwg/memory/entities/BoardTest" la="1415728005287"/>
-    <node st="3,t,f" id="53" rc="1" de="java/lang/Integer"/>
-    <node st="3,t,f" id="54" rc="0" de="de/htwg/memory/ui/TUITest" la="1415728005272"/>
-    <node st="3,t,f" id="55" rc="1" de="java/io/PrintStream"/>
-    <node st="3,t,f" id="56" rc="4" de="org/junit/After"/>
-    <node st="3,t,f" id="57" rc="4" de="java/lang/Exception"/>
-    <node st="3,t,f" id="58" rc="2" de="java/lang/reflect/Constructor"/>
-    <node st="3,t,f" id="59" rc="0" de="de/htwg/memory/main/MainTest" la="1415728005274"/>
-    <node st="3,t,t" id="60" rc="1" de="de/htwg/memory/logic/Util" la="1415728005253"/>
-    <node st="3,t,f" id="61" rc="2" de="java/lang/Class"/>
-    <node st="3,t,f" id="62" rc="1" de="javax/swing/JFrame"/>
-    <node st="3,t,f" id="63" rc="1" de="java/lang/System"/>
-    <node st="3,t,f" id="64" rc="2" de="java/lang/InterruptedException"/>
+    <node st="3,t,f" id="18" rc="1" de="java/awt/image/BufferedImage"/>
+    <node st="3,t,t" id="19" rc="4" de="de/htwg/memory/logic/SettingUtil" la="1420831518321"/>
+    <node st="3,t,f" id="20" rc="1" de="javax/swing/border/Border"/>
+    <node st="3,t,f" id="21" rc="1" de="java/util/Arrays"/>
+    <node st="3,t,f" id="22" rc="6" de="java/awt/Image"/>
+    <node st="3,t,f" id="23" rc="1" de="java/awt/GridLayout"/>
+    <node st="3,t,f" id="24" rc="2" de="java/awt/Dimension"/>
+    <node st="3,t,f" id="25" rc="1" de="java/lang/Long"/>
+    <node st="3,t,f" id="26" rc="1" de="java/lang/Math"/>
+    <node st="3,t,f" id="27" rc="2" de="java/util/Random"/>
+    <node st="3,t,f" id="28" rc="2" de="java/util/logging/Level"/>
+    <node st="3,t,t" id="29" rc="0" de="de/htwg/memory/ui/TUI" la="1415728862229"/>
+    <node st="3,t,f" id="30" rc="2" de="java/lang/Iterable"/>
+    <node st="3,t,f" id="31" rc="6" de="org/junit/Assert"/>
+    <node st="3,t,f" id="32" rc="2" de="java/util/LinkedList"/>
+    <node st="3,t,f" id="33" rc="0" de="de/htwg/memory/ui/VirtualConsoleTest" la="1415729083835"/>
+    <node st="3,t,f" id="34" rc="2" de="java/awt/Component"/>
+    <node st="3,t,f" id="35" rc="2" de="javax/swing/ImageIcon"/>
+    <node st="3,t,f" id="36" rc="1" de="java/lang/Comparable"/>
+    <node st="3,t,f" id="37" rc="2" de="java/awt/LayoutManager"/>
+    <node st="3,t,t" id="38" rc="5" de="de/htwg/memory/logic/BoardEventListener" la="1415728580504"/>
+    <node st="3,t,f" id="39" rc="2" de="java/util/logging/Logger"/>
+    <node st="3,t,f" id="40" rc="1" de="javax/swing/JButton"/>
+    <node st="3,t,f" id="41" rc="2" de="java/lang/IndexOutOfBoundsException"/>
+    <node st="3,t,f" id="42" rc="1" de="java/awt/image/ImageObserver"/>
+    <node st="3,t,t" id="43" rc="0" de="de/htwg/memory/main/Main" la="1420836536115"/>
+    <node st="3,t,f" id="44" rc="13" de="java/lang/String"/>
+    <node st="3,t,f" id="45" rc="0" de="de/htwg/memory/logic/SettingUtilTest" la="1415728580557"/>
+    <node st="3,t,t" id="46" rc="4" de="de/htwg/memory/entities/Board" la="1420845615103"/>
+    <node st="3,t,f" id="47" rc="0" de="de/htwg/memory/logic/BoardEventAdapterTest" la="1415728580560"/>
+    <node st="3,t,f" id="48" rc="2" de="java/awt/event/KeyListener"/>
+    <node st="3,t,f" id="49" rc="8" de="org/junit/Test"/>
+    <node st="3,t,f" id="50" rc="2" de="java/lang/NullPointerException"/>
+    <node st="3,t,f" id="51" rc="1" de="java/awt/event/ActionListener"/>
+    <node st="3,t,f" id="52" rc="1" de="java/awt/Font"/>
+    <node st="3,t,f" id="53" rc="1" de="javax/swing/BorderFactory"/>
+    <node st="3,t,f" id="54" rc="1" de="java/lang/Runnable"/>
+    <node st="3,t,f" id="55" rc="1" de="java/util/ArrayList"/>
+    <node st="3,t,f" id="56" rc="1" de="java/lang/CloneNotSupportedException"/>
+    <node st="3,t,t" id="57" rc="2" de="de/htwg/memory/logic/BoardEventAdapter" la="1415728580508"/>
+    <node st="3,t,f" id="58" rc="2" de="java/lang/IllegalAccessException"/>
+    <node st="3,t,f" id="59" rc="1" de="de/htwg/memory/ui/GUI" la="1420845598605"/>
+    <node st="3,t,f" id="60" rc="1" de="java/awt/Container"/>
+    <node st="3,t,f" id="61" rc="1" de="java/lang/Character"/>
+    <node st="3,t,f" id="62" rc="1" de="java/lang/Boolean"/>
+    <node st="3,t,f" id="63" rc="1" de="javax/swing/JTextArea"/>
+    <node st="3,t,t" id="64" rc="6" de="de/htwg/memory/entities/MemoryCard" la="1420836324406"/>
+    <node st="3,t,f" id="65" rc="1" de="javax/swing/text/Document"/>
+    <node st="3,t,f" id="66" rc="0" de="de/htwg/memory/entities/BoardTest" la="1420817605730"/>
+    <node st="3,t,f" id="67" rc="1" de="java/lang/Integer"/>
+    <node st="3,t,f" id="68" rc="1" de="de/htwg/memory/ui/MemCardButton" la="1420845372756"/>
+    <node st="3,t,f" id="69" rc="1" de="java/util/Collection"/>
+    <node st="3,t,f" id="70" rc="0" de="de/htwg/memory/ui/TUITest" la="1415728580547"/>
+    <node st="3,t,f" id="71" rc="1" de="javax/swing/JPanel"/>
+    <node st="3,t,f" id="72" rc="3" de="java/io/PrintStream"/>
+    <node st="3,t,f" id="73" rc="4" de="org/junit/After"/>
+    <node st="3,t,f" id="74" rc="4" de="java/lang/Exception"/>
+    <node st="3,t,f" id="75" rc="2" de="java/lang/reflect/Constructor"/>
+    <node st="3,t,f" id="76" rc="1" de="java/awt/Graphics2D"/>
+    <node st="3,t,f" id="77" rc="1" de="java/awt/Toolkit"/>
+    <node st="3,t,f" id="78" rc="0" de="de/htwg/memory/main/MainTest" la="1415728580549"/>
+    <node st="3,t,f" id="79" rc="2" de="java/awt/Graphics"/>
+    <node st="3,t,f" id="80" rc="3" de="java/awt/Color"/>
+    <node st="3,t,f" id="81" rc="1" de="java/awt/event/ActionEvent"/>
+    <node st="3,t,f" id="82" rc="2" de="java/lang/Class"/>
+    <node st="3,t,t" id="83" rc="3" de="de/htwg/memory/logic/Util" la="1420914823577"/>
+    <node st="3,t,f" id="84" rc="3" de="java/lang/InterruptedException"/>
+    <node st="3,t,f" id="85" rc="3" de="java/lang/System"/>
+    <node st="3,t,f" id="86" rc="2" de="javax/swing/JFrame"/>
     <edge st="3,t,f" fr="3" to="1"/>
-    <edge st="3,t,f" fr="3" to="58"/>
+    <edge st="3,t,f" fr="3" to="75"/>
     <edge st="3,t,f" fr="3" to="5"/>
-    <edge st="3,t,f" fr="3" to="25"/>
-    <edge st="3,t,f" fr="3" to="14"/>
-    <edge st="3,t,f" fr="3" to="61"/>
-    <edge st="3,t,f" fr="3" to="60"/>
-    <edge st="3,t,f" fr="3" to="46"/>
+    <edge st="3,t,f" fr="3" to="31"/>
+    <edge st="3,t,f" fr="3" to="22"/>
+    <edge st="3,t,f" fr="3" to="82"/>
+    <edge st="3,t,f" fr="3" to="83"/>
+    <edge st="3,t,f" fr="3" to="44"/>
+    <edge st="3,t,f" fr="3" to="11"/>
+    <edge st="3,t,f" fr="3" to="58"/>
     <edge st="3,t,f" fr="3" to="15"/>
     <edge st="3,t,f" fr="3" to="16"/>
-    <edge st="3,t,f" fr="3" to="41"/>
-    <edge st="3,t,f" fr="6" to="56"/>
-    <edge st="3,t,f" fr="6" to="57"/>
+    <edge st="3,t,f" fr="3" to="49"/>
+    <edge st="3,t,f" fr="6" to="73"/>
+    <edge st="3,t,f" fr="6" to="74"/>
     <edge st="3,t,f" fr="6" to="5"/>
-    <edge st="3,t,f" fr="6" to="25"/>
-    <edge st="3,t,f" fr="6" to="19"/>
+    <edge st="3,t,f" fr="6" to="31"/>
+    <edge st="3,t,f" fr="6" to="22"/>
     <edge st="3,t,f" fr="6" to="10"/>
-    <edge st="3,t,f" fr="6" to="36"/>
-    <edge st="3,t,f" fr="6" to="29"/>
-    <edge st="3,t,f" fr="6" to="51"/>
-    <edge st="3,t,f" fr="6" to="41"/>
-    <edge st="3,t,f" fr="8" to="23"/>
+    <edge st="3,t,f" fr="6" to="44"/>
+    <edge st="3,t,f" fr="6" to="35"/>
+    <edge st="3,t,f" fr="6" to="64"/>
+    <edge st="3,t,f" fr="6" to="49"/>
+    <edge st="3,t,f" fr="8" to="28"/>
     <edge st="3,t,f" fr="8" to="5"/>
     <edge st="3,t,f" fr="8" to="4"/>
     <edge st="3,t,f" fr="8" to="7"/>
     <edge st="3,t,f" fr="8" to="9"/>
-    <edge st="3,t,f" fr="8" to="13"/>
-    <edge st="3,t,f" fr="8" to="28"/>
-    <edge st="3,t,f" fr="8" to="55"/>
-    <edge st="3,t,f" fr="8" to="31"/>
-    <edge st="3,t,f" fr="8" to="33"/>
-    <edge st="3,t,f" fr="8" to="20"/>
-    <edge st="3,t,f" fr="8" to="36"/>
-    <edge st="3,t,f" fr="8" to="21"/>
-    <edge st="3,t,f" fr="8" to="64"/>
+    <edge st="3,t,f" fr="8" to="12"/>
+    <edge st="3,t,f" fr="8" to="34"/>
+    <edge st="3,t,f" fr="8" to="72"/>
+    <edge st="3,t,f" fr="8" to="37"/>
+    <edge st="3,t,f" fr="8" to="39"/>
+    <edge st="3,t,f" fr="8" to="24"/>
+    <edge st="3,t,f" fr="8" to="44"/>
+    <edge st="3,t,f" fr="8" to="86"/>
+    <edge st="3,t,f" fr="8" to="85"/>
+    <edge st="3,t,f" fr="8" to="84"/>
+    <edge st="3,t,f" fr="8" to="25"/>
     <edge st="3,t,f" fr="8" to="63"/>
-    <edge st="3,t,f" fr="8" to="62"/>
-    <edge st="3,t,f" fr="8" to="49"/>
-    <edge st="3,t,f" fr="8" to="50"/>
-    <edge st="3,t,f" fr="8" to="40"/>
-    <edge st="3,t,f" fr="18" to="5"/>
-    <edge st="3,t,f" fr="18" to="36"/>
-    <edge st="3,t,f" fr="24" to="23"/>
-    <edge st="3,t,f" fr="24" to="2"/>
-    <edge st="3,t,f" fr="24" to="53"/>
-    <edge st="3,t,f" fr="24" to="5"/>
-    <edge st="3,t,f" fr="24" to="4"/>
-    <edge st="3,t,t" fr="24" to="8"/>
-    <edge st="3,t,f" fr="24" to="7"/>
-    <edge st="3,t,f" fr="24" to="9"/>
-    <edge st="3,t,f" fr="24" to="26"/>
-    <edge st="3,t,f" fr="24" to="43"/>
-    <edge st="3,t,t" fr="24" to="32"/>
-    <edge st="3,t,f" fr="24" to="17"/>
-    <edge st="3,t,f" fr="24" to="33"/>
-    <edge st="3,t,f" fr="24" to="47"/>
-    <edge st="3,t,f" fr="24" to="48"/>
-    <edge st="3,t,f" fr="24" to="36"/>
-    <edge st="3,t,f" fr="24" to="64"/>
-    <edge st="3,t,t" fr="24" to="38"/>
-    <edge st="3,t,f" fr="24" to="40"/>
-    <edge st="3,t,t" fr="24" to="51"/>
-    <edge st="3,t,f" fr="27" to="56"/>
-    <edge st="3,t,f" fr="27" to="57"/>
-    <edge st="3,t,f" fr="27" to="5"/>
-    <edge st="3,t,f" fr="27" to="8"/>
-    <edge st="3,t,f" fr="27" to="25"/>
-    <edge st="3,t,f" fr="27" to="9"/>
-    <edge st="3,t,f" fr="27" to="10"/>
-    <edge st="3,t,f" fr="27" to="36"/>
-    <edge st="3,t,f" fr="27" to="29"/>
-    <edge st="3,t,f" fr="27" to="41"/>
-    <edge st="3,t,f" fr="32" to="5"/>
-    <edge st="3,t,t" fr="35" to="24"/>
-    <edge st="3,t,f" fr="35" to="5"/>
-    <edge st="3,t,f" fr="35" to="36"/>
-    <edge st="3,t,f" fr="37" to="1"/>
-    <edge st="3,t,f" fr="37" to="18"/>
-    <edge st="3,t,f" fr="37" to="58"/>
-    <edge st="3,t,f" fr="37" to="5"/>
-    <edge st="3,t,f" fr="37" to="25"/>
-    <edge st="3,t,f" fr="37" to="14"/>
-    <edge st="3,t,f" fr="37" to="61"/>
-    <edge st="3,t,f" fr="37" to="36"/>
-    <edge st="3,t,f" fr="37" to="46"/>
-    <edge st="3,t,f" fr="37" to="15"/>
-    <edge st="3,t,f" fr="37" to="16"/>
-    <edge st="3,t,f" fr="37" to="41"/>
-    <edge st="3,t,f" fr="38" to="42"/>
-    <edge st="3,t,f" fr="38" to="34"/>
-    <edge st="3,t,f" fr="38" to="2"/>
-    <edge st="3,t,t" fr="38" to="18"/>
+    <edge st="3,t,f" fr="8" to="48"/>
+    <edge st="3,t,f" fr="8" to="65"/>
+    <edge st="3,t,f" fr="19" to="5"/>
+    <edge st="3,t,f" fr="19" to="22"/>
+    <edge st="3,t,f" fr="19" to="44"/>
+    <edge st="3,t,f" fr="19" to="83"/>
+    <edge st="3,t,f" fr="29" to="28"/>
+    <edge st="3,t,f" fr="29" to="2"/>
+    <edge st="3,t,f" fr="29" to="67"/>
+    <edge st="3,t,f" fr="29" to="5"/>
+    <edge st="3,t,f" fr="29" to="4"/>
+    <edge st="3,t,t" fr="29" to="8"/>
+    <edge st="3,t,f" fr="29" to="7"/>
+    <edge st="3,t,f" fr="29" to="9"/>
+    <edge st="3,t,f" fr="29" to="32"/>
+    <edge st="3,t,f" fr="29" to="54"/>
+    <edge st="3,t,t" fr="29" to="38"/>
+    <edge st="3,t,f" fr="29" to="17"/>
+    <edge st="3,t,f" fr="29" to="39"/>
+    <edge st="3,t,f" fr="29" to="61"/>
+    <edge st="3,t,f" fr="29" to="62"/>
+    <edge st="3,t,f" fr="29" to="44"/>
+    <edge st="3,t,t" fr="29" to="46"/>
+    <edge st="3,t,f" fr="29" to="84"/>
+    <edge st="3,t,t" fr="29" to="64"/>
+    <edge st="3,t,f" fr="29" to="48"/>
+    <edge st="3,t,f" fr="33" to="73"/>
+    <edge st="3,t,f" fr="33" to="74"/>
+    <edge st="3,t,f" fr="33" to="5"/>
+    <edge st="3,t,f" fr="33" to="31"/>
+    <edge st="3,t,f" fr="33" to="8"/>
+    <edge st="3,t,f" fr="33" to="9"/>
+    <edge st="3,t,f" fr="33" to="10"/>
+    <edge st="3,t,f" fr="33" to="44"/>
+    <edge st="3,t,f" fr="33" to="35"/>
+    <edge st="3,t,f" fr="33" to="49"/>
     <edge st="3,t,f" fr="38" to="5"/>
-    <edge st="3,t,f" fr="38" to="26"/>
-    <edge st="3,t,f" fr="38" to="9"/>
-    <edge st="3,t,f" fr="38" to="36"/>
-    <edge st="3,t,f" fr="38" to="12"/>
-    <edge st="3,t,f" fr="38" to="22"/>
-    <edge st="3,t,t" fr="38" to="51"/>
-    <edge st="3,t,t" fr="38" to="32"/>
-    <edge st="3,t,f" fr="39" to="56"/>
-    <edge st="3,t,f" fr="39" to="57"/>
-    <edge st="3,t,f" fr="39" to="5"/>
-    <edge st="3,t,f" fr="39" to="10"/>
-    <edge st="3,t,f" fr="39" to="45"/>
-    <edge st="3,t,f" fr="39" to="41"/>
+    <edge st="3,f,t" fr="43" to="29"/>
+    <edge st="3,t,f" fr="43" to="5"/>
+    <edge st="3,t,f" fr="43" to="44"/>
+    <edge st="3,t,f" fr="43" to="59"/>
+    <edge st="3,t,f" fr="45" to="1"/>
+    <edge st="3,t,f" fr="45" to="75"/>
+    <edge st="3,t,f" fr="45" to="19"/>
     <edge st="3,t,f" fr="45" to="5"/>
-    <edge st="3,t,t" fr="45" to="32"/>
-    <edge st="3,t,f" fr="51" to="5"/>
-    <edge st="3,t,f" fr="51" to="9"/>
-    <edge st="3,t,f" fr="51" to="19"/>
-    <edge st="3,t,f" fr="51" to="11"/>
-    <edge st="3,t,f" fr="51" to="36"/>
-    <edge st="3,t,f" fr="51" to="44"/>
-    <edge st="3,t,f" fr="51" to="30"/>
-    <edge st="3,t,f" fr="52" to="42"/>
-    <edge st="3,t,f" fr="52" to="5"/>
-    <edge st="3,t,f" fr="52" to="25"/>
-    <edge st="3,t,f" fr="52" to="10"/>
-    <edge st="3,t,f" fr="52" to="45"/>
-    <edge st="3,t,f" fr="52" to="32"/>
-    <edge st="3,t,f" fr="52" to="56"/>
-    <edge st="3,t,f" fr="52" to="57"/>
-    <edge st="3,t,f" fr="52" to="34"/>
-    <edge st="3,t,f" fr="52" to="18"/>
-    <edge st="3,t,f" fr="52" to="36"/>
-    <edge st="3,t,f" fr="52" to="38"/>
-    <edge st="3,t,f" fr="52" to="51"/>
-    <edge st="3,t,f" fr="52" to="22"/>
-    <edge st="3,t,f" fr="52" to="41"/>
-    <edge st="3,t,f" fr="54" to="24"/>
-    <edge st="3,t,f" fr="54" to="5"/>
-    <edge st="3,t,f" fr="54" to="25"/>
-    <edge st="3,t,f" fr="54" to="10"/>
-    <edge st="3,t,f" fr="54" to="41"/>
+    <edge st="3,t,f" fr="45" to="31"/>
+    <edge st="3,t,f" fr="45" to="44"/>
+    <edge st="3,t,f" fr="45" to="82"/>
+    <edge st="3,t,f" fr="45" to="11"/>
+    <edge st="3,t,f" fr="45" to="58"/>
+    <edge st="3,t,f" fr="45" to="15"/>
+    <edge st="3,t,f" fr="45" to="16"/>
+    <edge st="3,t,f" fr="45" to="49"/>
+    <edge st="3,t,f" fr="46" to="50"/>
+    <edge st="3,t,f" fr="46" to="2"/>
+    <edge st="3,t,f" fr="46" to="30"/>
+    <edge st="3,t,f" fr="46" to="5"/>
+    <edge st="3,t,f" fr="46" to="9"/>
+    <edge st="3,t,f" fr="46" to="32"/>
+    <edge st="3,t,f" fr="46" to="55"/>
+    <edge st="3,t,f" fr="46" to="14"/>
+    <edge st="3,t,f" fr="46" to="69"/>
+    <edge st="3,t,t" fr="46" to="38"/>
+    <edge st="3,t,t" fr="46" to="19"/>
+    <edge st="3,t,f" fr="46" to="41"/>
+    <edge st="3,t,f" fr="46" to="21"/>
+    <edge st="3,t,f" fr="46" to="44"/>
+    <edge st="3,t,f" fr="46" to="27"/>
+    <edge st="3,t,t" fr="46" to="64"/>
+    <edge st="3,t,f" fr="47" to="73"/>
+    <edge st="3,t,f" fr="47" to="74"/>
+    <edge st="3,t,f" fr="47" to="5"/>
+    <edge st="3,t,f" fr="47" to="10"/>
+    <edge st="3,t,f" fr="47" to="57"/>
+    <edge st="3,t,f" fr="47" to="49"/>
+    <edge st="3,t,f" fr="57" to="5"/>
+    <edge st="3,t,t" fr="57" to="38"/>
+    <edge st="3,t,f" fr="59" to="4"/>
+    <edge st="3,t,f" fr="59" to="30"/>
     <edge st="3,t,f" fr="59" to="5"/>
-    <edge st="3,t,f" fr="59" to="41"/>
-    <edge st="3,t,f" fr="60" to="5"/>
+    <edge st="3,t,f" fr="59" to="53"/>
+    <edge st="3,t,f" fr="59" to="68"/>
+    <edge st="3,t,f" fr="59" to="14"/>
+    <edge st="3,t,f" fr="59" to="71"/>
+    <edge st="3,t,f" fr="59" to="34"/>
+    <edge st="3,t,f" fr="59" to="60"/>
+    <edge st="3,t,f" fr="59" to="37"/>
+    <edge st="3,t,f" fr="59" to="38"/>
+    <edge st="3,t,f" fr="59" to="77"/>
+    <edge st="3,t,f" fr="59" to="20"/>
+    <edge st="3,t,f" fr="59" to="23"/>
+    <edge st="3,t,f" fr="59" to="24"/>
+    <edge st="3,t,f" fr="59" to="86"/>
+    <edge st="3,t,f" fr="59" to="46"/>
+    <edge st="3,t,f" fr="59" to="84"/>
+    <edge st="3,t,f" fr="59" to="26"/>
+    <edge st="3,t,f" fr="59" to="64"/>
+    <edge st="3,t,f" fr="64" to="5"/>
+    <edge st="3,t,f" fr="64" to="9"/>
+    <edge st="3,t,f" fr="64" to="13"/>
+    <edge st="3,t,f" fr="64" to="56"/>
+    <edge st="3,t,f" fr="64" to="36"/>
+    <edge st="3,t,f" fr="64" to="72"/>
+    <edge st="3,t,f" fr="64" to="19"/>
+    <edge st="3,t,f" fr="64" to="22"/>
+    <edge st="3,t,f" fr="64" to="80"/>
+    <edge st="3,t,f" fr="64" to="44"/>
+    <edge st="3,t,f" fr="64" to="83"/>
+    <edge st="3,t,f" fr="64" to="46"/>
+    <edge st="3,t,f" fr="64" to="85"/>
+    <edge st="3,t,f" fr="66" to="50"/>
+    <edge st="3,t,f" fr="66" to="5"/>
+    <edge st="3,t,f" fr="66" to="31"/>
+    <edge st="3,t,f" fr="66" to="10"/>
+    <edge st="3,t,f" fr="66" to="57"/>
+    <edge st="3,t,f" fr="66" to="38"/>
+    <edge st="3,t,f" fr="66" to="73"/>
+    <edge st="3,t,f" fr="66" to="74"/>
+    <edge st="3,t,f" fr="66" to="41"/>
+    <edge st="3,t,f" fr="66" to="19"/>
+    <edge st="3,t,f" fr="66" to="44"/>
+    <edge st="3,t,f" fr="66" to="46"/>
+    <edge st="3,t,f" fr="66" to="27"/>
+    <edge st="3,t,f" fr="66" to="64"/>
+    <edge st="3,t,f" fr="66" to="49"/>
+    <edge st="3,t,f" fr="68" to="51"/>
+    <edge st="3,t,f" fr="68" to="40"/>
+    <edge st="3,t,f" fr="68" to="42"/>
+    <edge st="3,t,f" fr="68" to="22"/>
+    <edge st="3,t,f" fr="68" to="79"/>
+    <edge st="3,t,f" fr="68" to="80"/>
+    <edge st="3,t,f" fr="68" to="81"/>
+    <edge st="3,t,f" fr="68" to="44"/>
+    <edge st="3,t,f" fr="68" to="85"/>
+    <edge st="3,t,f" fr="68" to="64"/>
+    <edge st="3,t,f" fr="68" to="72"/>
+    <edge st="3,t,f" fr="70" to="29"/>
+    <edge st="3,t,f" fr="70" to="5"/>
+    <edge st="3,t,f" fr="70" to="31"/>
+    <edge st="3,t,f" fr="70" to="10"/>
+    <edge st="3,t,f" fr="70" to="49"/>
+    <edge st="3,t,f" fr="78" to="5"/>
+    <edge st="3,t,f" fr="78" to="49"/>
+    <edge st="3,t,f" fr="83" to="18"/>
+    <edge st="3,t,f" fr="83" to="52"/>
+    <edge st="3,t,f" fr="83" to="76"/>
+    <edge st="3,t,f" fr="83" to="5"/>
+    <edge st="3,t,f" fr="83" to="22"/>
+    <edge st="3,t,f" fr="83" to="79"/>
+    <edge st="3,t,f" fr="83" to="80"/>
+    <edge st="3,t,f" fr="83" to="44"/>
   </graph>
 </structure101-builder>
