@@ -9,5 +9,4 @@ public final class Main {
 		new GUI(10, 5);
 //		new TUI().startGameThreat();
 	}
-
 }

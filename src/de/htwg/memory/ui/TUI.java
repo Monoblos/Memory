@@ -1,5 +1,7 @@
 package de.htwg.memory.ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
@@ -11,7 +13,7 @@ import de.htwg.memory.entities.Board;
 import de.htwg.memory.entities.MemoryCard;
 import de.htwg.memory.logic.BoardEventListener;
 
-public class TUI implements Runnable, BoardEventListener, KeyListener {
+public class TUI implements Runnable, BoardEventListener, KeyListener, ActionListener {
 	private VirtualConsole virtualConsole;
 	private Board board;
 	private Thread game;
@@ -62,68 +64,80 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 	public void run() {
 		virtualConsole = new VirtualConsole();
 		virtualConsole.addKeyListener(this);
+		this.virtualConsole.addMenueItem(this, "Reset");
 		
 		board.shuffle();
 		
 		virtualConsole.println(board);
 		virtualConsole.println("Select card " + cardToPick + ":");
 		
-
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while (continueRunning) {
-					synchronized (holder) {
-						while (holder.isEmpty()) {
-							try {
-								holder.wait();
-							} catch (InterruptedException e) {
-								Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
-							}
-						}
-						
-						char lastKey = holder.remove(0);
-						int key;
-						try {
-							key = Integer.valueOf(String.valueOf(lastKey)) - 1;
-						} catch (NumberFormatException e) {
-							virtualConsole.println("Invalid input: '" + lastKey + "'");
-							continue;
-						}
-						if (key >= 0 && key < board.getWidth()) {
-							virtualConsole.print(lastKey);
-							if (selectedRow == -1) {
-								selectedRow = key;
-								continue;
-							}
-							virtualConsole.clear();
-							board.pickCard(selectedRow, key);
-							selectedRow = -1;
-							cardToPick++;
-						} else {
-							virtualConsole.println("Index out of range: '" + lastKey + "'");
-							continue;
-						}
-
-						virtualConsole.clear();
-						virtualConsole.println(board);
-						virtualConsole.println("Select card " + cardToPick + ":");
-						countRounds++;
+		while (continueRunning) {
+			char lastKey = ' ';
+			synchronized (holder) {
+				while (holder.isEmpty()) {
+					try {
+						holder.wait();
+					} catch (InterruptedException e) {
+						Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
 					}
 				}
+				
+				lastKey = holder.remove(0);
 			}
-		}).start();
-		
-		while(continueRunning) {
+			int key;
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
+				key = Integer.valueOf(String.valueOf(lastKey)) - 1;
+			} catch (NumberFormatException e) {
+				if (lastKey == KeyEvent.VK_BACK_SPACE) {
+					if(roleBack()) {
+						continue;
+					}
+				}
+				virtualConsole.println("Invalid input: '" + lastKey + "'");
+				continue;
+			}
+			
+			if (handleKey(key)) {
+				virtualConsole.clear();
+				virtualConsole.println(board);
+				virtualConsole.println("Select card " + cardToPick + ":");
 			}
 		}
 		
 		virtualConsole.kill();
 	}
+	
+	private boolean handleKey(int key) {
+		if (key >= 0 && key < board.getWidth()) {
+			virtualConsole.print(key + 1);
+			if (selectedRow == -1) {
+				selectedRow = key;
+				return false;
+			}
+			
+			if (!board.pickCard(selectedRow, key)) {
+				virtualConsole.println("Card already picked: '" + String.valueOf(selectedRow + 1) + (key + 1) + "'");
+				selectedRow = -1;
+				return false;
+			} else {
+				cardToPick++;
+			}
+			selectedRow = -1;
+		} else {
+			virtualConsole.println("Index out of range: '" + (key + 1) + "'");
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean roleBack() {
+		if (selectedRow == -1) {
+			return false;
+		}
+		selectedRow = -1;
+		return true;
+	}
+	
 	@Override
 	public void win() {
 		virtualConsole.println("Congratulation, you won!");
@@ -133,14 +147,18 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 	}
 	@Override
 	public void matchMade() {
-		cardToPick = 1;
+		cardToPick = 0;
+		countRounds++;
+		virtualConsole.clear();
+		virtualConsole.println(board);
 		virtualConsole.println();
 		virtualConsole.println("Correct match!");
 		virtualConsole.waitForKey();
 	}
 	@Override
 	public void beforeBoardReset() {
-		cardToPick = 1;
+		cardToPick = 0;
+		countRounds++;
 		virtualConsole.clear();
 		virtualConsole.println(board);
 		virtualConsole.print("No match! Press any key to hide and continue... ");
@@ -166,5 +184,19 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 			holder.notify();
 		}
 		e.consume();
+	}
+	public void actionPerformed(ActionEvent a){
+		this.continueRunning = false;
+		this.virtualConsole.clear();
+		this.board = new Board(null,4,4);
+		this.board.shuffle();
+		this.board.hideAll();
+		this.board.addListener(this);
+		this.cardToPick = 1;
+		this.countRounds = 0;
+		this.virtualConsole.println(board);
+		virtualConsole.println("Select card " + cardToPick + ":");
+		this.continueRunning = true;
+			
 	}
 }
