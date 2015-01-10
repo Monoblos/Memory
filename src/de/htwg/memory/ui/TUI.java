@@ -1,5 +1,7 @@
 package de.htwg.memory.ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
@@ -11,7 +13,7 @@ import de.htwg.memory.entities.Board;
 import de.htwg.memory.entities.MemoryCard;
 import de.htwg.memory.logic.BoardEventListener;
 
-public class TUI implements Runnable, BoardEventListener, KeyListener {
+public class TUI implements Runnable, BoardEventListener, KeyListener, ActionListener {
 	private VirtualConsole virtualConsole;
 	private Board board;
 	private Thread game;
@@ -62,6 +64,7 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 	public void run() {
 		virtualConsole = new VirtualConsole();
 		virtualConsole.addKeyListener(this);
+		this.virtualConsole.addMenueItem(this, "Reset");
 		
 		board.shuffle();
 		
@@ -181,5 +184,19 @@ public class TUI implements Runnable, BoardEventListener, KeyListener {
 			holder.notify();
 		}
 		e.consume();
+	}
+	public void actionPerformed(ActionEvent a){
+		this.continueRunning = false;
+		this.virtualConsole.clear();
+		this.board = new Board(null,4,4);
+		this.board.shuffle();
+		this.board.hideAll();
+		this.board.addListener(this);
+		this.cardToPick = 1;
+		this.countRounds = 0;
+		this.virtualConsole.println(board);
+		virtualConsole.println("Select card " + cardToPick + ":");
+		this.continueRunning = true;
+			
 	}
 }

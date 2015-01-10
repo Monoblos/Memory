@@ -2,12 +2,16 @@ package de.htwg.memory.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
 
 public class VirtualConsole {
@@ -47,6 +51,8 @@ public class VirtualConsole {
 
 	private JFrame frame;
 	private JTextArea text;
+	private JMenu menu;
+	private JMenuBar menuBar;
 	private ForKeyWaiter k = new ForKeyWaiter();
 
 	public VirtualConsole() {
@@ -58,6 +64,11 @@ public class VirtualConsole {
 		frame.add(text, BorderLayout.CENTER);
 		frame.setMinimumSize(new Dimension(600, 300));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		menu = new JMenu("Menü");
+		menuBar = new JMenuBar();
+		menuBar.add(menu);
+		frame.add(menuBar, BorderLayout.BEFORE_FIRST_LINE);
+		menuBar.setVisible(true);
 		frame.setVisible(true);
 	}
 
@@ -133,5 +144,11 @@ public class VirtualConsole {
 
 	public void removeKeyListener(KeyListener l) {
 		text.removeKeyListener(l);
+	}
+	public void addMenueItem(ActionListener a, String s){
+		JMenuItem item = new JMenuItem(s);
+		menu.add(item);
+		item.addActionListener(a);
+		
 	}
 }
