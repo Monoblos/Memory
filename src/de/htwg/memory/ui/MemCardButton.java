@@ -22,7 +22,6 @@ public class MemCardButton extends JButton implements ActionListener {
 	
 	@Override
 	public void paint(Graphics g) {
-		System.out.println("Repainting card...");
 		if (card == null || card.getPicture() == null) {
 			g.setColor(Color.WHITE);
 			g.clearRect(0, 0, this.getWidth(), this.getHeight());
@@ -31,13 +30,19 @@ public class MemCardButton extends JButton implements ActionListener {
 			g.drawLine(0, this.getHeight(), this.getWidth(), 0);
 			return;
 		}
-		g.setColor(Color.WHITE);
+		g.setColor(Color.RED);
 		g.clearRect(0, 0, this.getWidth(), this.getHeight());
 		g.drawImage(card.getPicture(), 0, 0, this.getWidth(), this.getHeight(),null);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		card.pick();
+	public void actionPerformed(ActionEvent e) {
+		//Picking card's can result in wait times, as this should not affect the UI we do it in a extra thread.
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				card.pick();
+			}
+		}).start();
 	}
 }

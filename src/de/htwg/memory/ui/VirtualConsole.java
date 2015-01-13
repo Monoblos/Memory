@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -68,7 +66,6 @@ public class VirtualConsole {
 		menuBar = new JMenuBar();
 		menuBar.add(menu);
 		frame.add(menuBar, BorderLayout.BEFORE_FIRST_LINE);
-		menuBar.setVisible(true);
 		frame.setVisible(true);
 	}
 
@@ -104,15 +101,7 @@ public class VirtualConsole {
 		text.setText("");
 	}
 
-	public void wait(int millis) {
-		try {
-			Thread.sleep(Long.valueOf(millis));
-		} catch (InterruptedException e) {
-			Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
-		}
-	}
-
-	public void waitForKey() {
+	public void waitForKey() throws InterruptedException {
 		KeyListener[] oldListeners = text.getKeyListeners();
 		for (KeyListener l : oldListeners) {
 			if (l != k) {
@@ -123,11 +112,7 @@ public class VirtualConsole {
 		k.arm();
 		synchronized (k.synchronizer) {
 			while (!k.synchronizer.ready) {
-				try {
-					k.synchronizer.wait();
-				} catch (InterruptedException e) {
-					Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
-				}
+				k.synchronizer.wait();
 			}
 		}
 

@@ -33,13 +33,14 @@ public class MemoryCardTest {
 	public void testGetPicture() {
 		Image value1 = new ImageIcon(new byte[]{0, 1, 2, 3, 4, 5, 6, 7}).getImage();
 		Image value2 = new ImageIcon(new byte[]{3, 1, 3, 2, 5, 1, 3, 7}).getImage();
-		assertNull(memoryCard.getPicture());
+		memoryCard.setSolved(true);
+		assertNotNull(memoryCard.getPicture());
 		memoryCard.setPicture(value1);
 		assertEquals(value1, memoryCard.getPicture());
 		memoryCard.setPicture(value2);
 		assertEquals(value2, memoryCard.getPicture());
 		memoryCard.setPicture(null);
-		assertNull(memoryCard.getPicture());
+		assertNotNull(memoryCard.getPicture());
 	}
 
 	@Test

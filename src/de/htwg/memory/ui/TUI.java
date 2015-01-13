@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import de.htwg.memory.entities.Board;
 import de.htwg.memory.entities.MemoryCard;
@@ -41,14 +39,15 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 		this.board.addListener(this);
 		this.game = null;
 		this.continueRunning = false;
-		this.selectedRow = -1;
-		this.cardToPick = 1;
-		this.countRounds = 0;
 	}
 	
 	public void startGameThreat() {
 		game = new Thread(this);
 		continueRunning = true;
+		this.selectedRow = -1;
+		this.countRounds = 0;
+		this.cardToPick = 1;
+		holder.clear();
 		game.start();
 	}
 	
@@ -64,13 +63,20 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 	public void run() {
 		virtualConsole = new VirtualConsole();
 		virtualConsole.addKeyListener(this);
-		this.virtualConsole.addMenueItem(this, "Reset");
+		virtualConsole.addMenueItem(this, "Reset");
+		virtualConsole.addMenueItem(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		}, "Exit");
 		
 		board.shuffle();
 		
 		virtualConsole.println(board);
 		virtualConsole.println("Select card " + cardToPick + ":");
 		
+		gameloop:
 		while (continueRunning) {
 			char lastKey = ' ';
 			synchronized (holder) {
@@ -78,7 +84,7 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 					try {
 						holder.wait();
 					} catch (InterruptedException e) {
-						Logger.getLogger("").log(Level.ALL, "Interupt exception happend");
+						break gameloop;
 					}
 				}
 				
@@ -97,7 +103,7 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 				continue;
 			}
 			
-			if (handleKey(key)) {
+			if (handleKey(key) && continueRunning) {
 				virtualConsole.clear();
 				virtualConsole.println(board);
 				virtualConsole.println("Select card " + cardToPick + ":");
@@ -105,6 +111,7 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 		}
 		
 		virtualConsole.kill();
+		return;
 	}
 	
 	private boolean handleKey(int key) {
@@ -142,7 +149,11 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 	public void win() {
 		virtualConsole.println("Congratulation, you won!");
 		virtualConsole.println("Rounds played: " + this.countRounds);
-		virtualConsole.waitForKey();
+		try {
+			virtualConsole.waitForKey();
+		} catch (InterruptedException e) {
+			return;
+		}
 		endGameThreat();
 	}
 	@Override
@@ -153,7 +164,11 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 		virtualConsole.println(board);
 		virtualConsole.println();
 		virtualConsole.println("Correct match!");
-		virtualConsole.waitForKey();
+		try {
+			virtualConsole.waitForKey();
+		} catch (InterruptedException e) {
+			return;
+		}
 	}
 	@Override
 	public void beforeBoardReset() {
@@ -162,7 +177,11 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 		virtualConsole.clear();
 		virtualConsole.println(board);
 		virtualConsole.print("No match! Press any key to hide and continue... ");
-		virtualConsole.waitForKey();
+		try {
+			virtualConsole.waitForKey();
+		} catch (InterruptedException e) {
+			return;
+		}
 	}
 	@Override
 	public void afterBoardReset() {
@@ -187,16 +206,16 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 	}
 	public void actionPerformed(ActionEvent a){
 		this.continueRunning = false;
-		this.virtualConsole.clear();
-		this.board = new Board(null,4,4);
-		this.board.shuffle();
-		this.board.hideAll();
+		game.interrupt();
+		try {
+			game.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.board.removeListener(this);
+		this.board.reset();
 		this.board.addListener(this);
-		this.cardToPick = 1;
-		this.countRounds = 0;
-		this.virtualConsole.println(board);
-		virtualConsole.println("Select card " + cardToPick + ":");
-		this.continueRunning = true;
-			
+		
+		startGameThreat();
 	}
 }

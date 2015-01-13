@@ -11,7 +11,7 @@ import org.junit.Test;
 public class SettingUtilTest {
 	@Test
 	public void testGetHiddenValue() {
-		assertEquals("?", SettingUtil.getHiddenValue());
+		assertEquals(" ? ", SettingUtil.getHiddenValue());
 	}
 	
 	@Test

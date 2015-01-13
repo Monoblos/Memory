@@ -1,11 +1,13 @@
 package de.htwg.memory.ui;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import de.htwg.memory.entities.Board;
@@ -50,8 +52,6 @@ public class GUI extends JFrame implements BoardEventListener {
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		this.setContentPane(panel);
 		for(MemoryCard mc : board.getMemoryCardIterator()) {
-			if(mc != null)
-				mc.registerInBoard(board);
 			this.add(new MemCardButton(mc));
 		}
 		
@@ -62,24 +62,43 @@ public class GUI extends JFrame implements BoardEventListener {
 
 	@Override
 	public void win() {
-		
+		if (JOptionPane.showConfirmDialog(this,
+				"Victory! Number of turns: " + countRounds + "\nDo you want to restart?",
+				"Victory!",
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			resetGame();
+		}
 	}
 	@Override
 	public void matchMade() {
-		this.invalidate();
 	}
 	@Override
 	public void beforeBoardReset() {
 		this.invalidate();
 		this.repaint();
+		countRounds++;
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 	@Override
 	public void afterBoardReset() {
+		this.invalidate();
+		this.repaint();
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+	}
+	
+	private void resetGame() {
+		this.board.removeListener(this);
+		this.board.reset();
+		this.board.shuffle();
+		this.board.addListener(this);
 		this.invalidate();
 		this.repaint();
 	}

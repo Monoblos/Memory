@@ -2,16 +2,18 @@ package de.htwg.memory.entities;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.util.LinkedList;
+import java.util.List;
 
 import de.htwg.memory.logic.SettingUtil;
 import de.htwg.memory.logic.Util;
 
-public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
+public class MemoryCard implements Comparable<MemoryCard>, Cloneable, MemoryCardInterface{
 	private int cardValue;
 	private Image picture;
 	private boolean visible;
 	private boolean solved;
-	private Board board;
+	private List<MemoryCardEventListener> listeners = new LinkedList<>();
 	
 	public MemoryCard() {
 		this(0);
@@ -36,8 +38,11 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 		this.picture = value;
 	}
 	public Image getPicture() {
-		if (isVisible())
-			return Util.createImageFromString(this.toString(), Color.WHITE, Color.BLUE);
+		if (isVisible() || isSolved()) {
+			if (picture == null)
+				return Util.createImageFromString(this.toString(), new Color(0x00FF0000, true), Color.BLACK);
+			return picture;
+		}
 		else
 			return SettingUtil.getHiddenImage();
 	}
@@ -45,6 +50,7 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 	public boolean isVisible() {
 		return visible;
 	}
+	@Override
 	public boolean setVisible(boolean visible) {
 		if (visible && !this.visible && !this.solved) {
 			this.visible = visible;
@@ -62,13 +68,25 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable{
 		this.solved = solved;
 	}
 	
-	public void registerInBoard(Board b) {
-		board = b;
+	public void addListener(MemoryCardEventListener listener) {
+		listeners.add(listener);
+	}
+	public void removeListener(MemoryCardEventListener listener) {
+		listeners.remove(listener);
 	}
 	public void pick() {
-		if (board != null)
-			board.pickCard(this);
-		System.out.println("Board looks like this:\n" + board);
+		for(final MemoryCardEventListener listener : listeners) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					listener.picked(getThis());
+				}
+			}).start();
+		}
+	}
+	
+	private MemoryCard getThis() {
+		return this;
 	}
 	
 	@Override
