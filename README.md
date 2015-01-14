@@ -22,7 +22,7 @@ Memory
   * SettingUtil
     * Enthält Methoden zum einstellen aller Einstellungen.
   * Util 
-    * Enthält allgemeine, keiner Schicht genau zuordenbare Methoden.
+    * Enthält allgemeine, keiner spezifischen Klasse zuordenbare, Methoden.
 
 
 * main 
