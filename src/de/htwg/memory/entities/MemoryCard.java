@@ -8,7 +8,7 @@ import java.util.List;
 import de.htwg.memory.logic.SettingUtil;
 import de.htwg.memory.logic.Util;
 
-public class MemoryCard implements Comparable<MemoryCard>, Cloneable, MemoryCardInterface{
+public class MemoryCard implements Comparable<MemoryCard>, Cloneable, IMemoryCard{
 	private int cardValue;
 	private Image picture;
 	private boolean visible;
@@ -99,6 +99,8 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable, MemoryCard
 	}
 	@Override
 	public String toString() {
+		if (cardValue == 0)
+			return " X ";
 		if (visible || solved) {
 			return " " + String.valueOf(cardValue) + " ";
 		}

@@ -80,6 +80,11 @@ public class BoardTest {
 		} catch (IndexOutOfBoundsException e) { }
 	}
 	
+	@Test
+	public void testReset() {
+		
+	}
+	
 	@After
 	public void breakDown() throws Exception {
 		

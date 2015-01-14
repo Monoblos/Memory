@@ -1,6 +1,5 @@
 package de.htwg.memory.entities;
 
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,21 +7,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 
 import de.htwg.memory.logic.BoardEventListener;
+import de.htwg.memory.logic.SaveFile;
 import de.htwg.memory.logic.SettingUtil;
 
 public class Board implements MemoryCardEventListener{
+	private static final int NO_MATCH_MADE = -1;
+	private static final int MATCH_MADE = 1;
+	private static final int TOO_LESS_CARDS = 0;
+	private static final int TOO_MANY_CARDS = -2;
+	
 	private MemoryCard[][] memoryCards;
 	private int cardCount;
 	private List<BoardEventListener> eventListeners;
 	
 	public Board(MemoryCard[] memoryCards, int width, int height) {
 		MemoryCard[] cards = memoryCards;
-		this.memoryCards = new MemoryCard[width][height];
+		this.memoryCards = new MemoryCard[height][width];
 		cardCount = 0;
 		
 		if(cards == null) {
@@ -72,12 +78,12 @@ public class Board implements MemoryCardEventListener{
 	public boolean pickCard(int x, int y) {
 		return pickCard(memoryCards[x][y]);
 	}
-	public boolean pickCard(MemoryCardInterface c) {
+	public boolean pickCard(IMemoryCard c) {
 		if (!c.setVisible(true)) {
 			return false;
 		}
 		int matchMade = updateMatchings();
-		if (matchMade == 1) {
+		if (matchMade == MATCH_MADE) {
 			for (BoardEventListener l : eventListeners) {
 				l.matchMade();
 			}
@@ -86,7 +92,7 @@ public class Board implements MemoryCardEventListener{
 					l.win();
 				}
 			}
-		} else if (matchMade == -2) {
+		} else if (matchMade == TOO_MANY_CARDS) {
 			c.setVisible(false);
 		}
 		return true;
@@ -95,7 +101,7 @@ public class Board implements MemoryCardEventListener{
 		boolean hasVisible = false;
 		for (int i = 0; i < memoryCards.length; i++) {
 			for (int j = 0; j < memoryCards[i].length; j++) {
-				hasVisible |= memoryCards[i][j].isVisible() && !memoryCards[i][j].isSolved();
+				hasVisible |= getCard(i, j).isVisible() && !getCard(i, j).isSolved();
 			}
 		}
 		return hasVisible;
@@ -104,10 +110,18 @@ public class Board implements MemoryCardEventListener{
 		boolean isFinished = true;
 		for (int i = 0; i < memoryCards.length && isFinished; i++) {
 			for (int j = 0; j < memoryCards[i].length && isFinished; j++) {
-				isFinished &= memoryCards[i][j].isSolved();
+				isFinished &= getCard(i, j).isSolved();
 			}
 		}
 		return isFinished;
+	}
+	
+	private MemoryCard getCard(int x, int y) {
+		if (memoryCards[x][y] != null) {
+			return memoryCards[x][y];
+		} else {
+			return new MemoryCard();
+		}
 	}
 	/**
 	 * 
@@ -117,9 +131,9 @@ public class Board implements MemoryCardEventListener{
 		MemoryCard foundCards[] = getChoosenCards();
 		
 		if (foundCards.length < SettingUtil.getNumberOfCardsToMatch()) {
-			return 0;
+			return TOO_LESS_CARDS;
 		} else if (foundCards.length > SettingUtil.getNumberOfCardsToMatch()) {
-			return -2;
+			return TOO_MANY_CARDS;
 		}
 		
 		boolean allMatch = true;
@@ -130,11 +144,11 @@ public class Board implements MemoryCardEventListener{
 			for (int i = 0; i < foundCards.length; i++) {
 				foundCards[i].setSolved(true);
 			}
-			return 1;
+			return MATCH_MADE;
 		}
 		
 		hideAll();
-		return -1;
+		return NO_MATCH_MADE;
 	}
 	
 	private MemoryCard[] getChoosenCards() {
@@ -143,15 +157,16 @@ public class Board implements MemoryCardEventListener{
 		
 		for (int i = 0; i < memoryCards.length; i++) {
 			for (int j = 0; j < memoryCards[i].length; j++) {
-				if (memoryCards[i][j].isVisible() && !memoryCards[i][j].isSolved()) {
-					foundCards[cardsFound++] = memoryCards[i][j];
+				if (getCard(i, j).isVisible() && !getCard(i, j).isSolved()) {
+					foundCards[cardsFound++] = getCard(i, j);
 				}
 			}
 		}
 		
 		MemoryCard result[] = new MemoryCard[cardsFound];
-		for (int i = 0; i < cardsFound; i++)
+		for (int i = 0; i < cardsFound; i++) {
 			result[i] = foundCards[i];
+		}
 		return result;
 	}
 	
@@ -178,7 +193,7 @@ public class Board implements MemoryCardEventListener{
 		}
 		for (int i = 0; i < memoryCards.length; i++) {
 			for (int j = 0; j < memoryCards[i].length; j++) {
-				memoryCards[i][j].setVisible(false);
+				getCard(i, j).setVisible(false);
 			}
 		}
 		for (BoardEventListener l : eventListeners) {
@@ -192,8 +207,8 @@ public class Board implements MemoryCardEventListener{
 		}
 		for (int i = 0; i < memoryCards.length; i++) {
 			for (int j = 0; j < memoryCards[i].length; j++) {
-				memoryCards[i][j].setVisible(false);
-				memoryCards[i][j].setSolved(false);
+				getCard(i, j).setVisible(false);
+				getCard(i, j).setSolved(false);
 			}
 		}
 		for (BoardEventListener l : eventListeners) {
@@ -217,30 +232,33 @@ public class Board implements MemoryCardEventListener{
 	
 	public Iterable<MemoryCard> getMemoryCardIterator() {
 		ArrayList<MemoryCard> forIt = new ArrayList<>();
-		for(int i = 0; i < memoryCards.length; i++)
+		for(int i = 0; i < memoryCards.length; i++) {
 			forIt.addAll(Arrays.asList(memoryCards[i]));
+		}
 		return forIt;
 	}
 
-	public static Board fromImages(File[] img, ActionListener a){
-		MemoryCard[] memCard = new MemoryCard[img.length];
+	public static Board load(File gameFile){
+		SaveFile sv = new SaveFile(gameFile);
+		
+		SettingUtil.setNumberOfCardsToMatch(sv.getCardsToMatch());
+		
+		MemoryCard[] memCard = new MemoryCard[sv.getCards().size()];
 		BufferedImage image = null;
-		if(img.length <= 1){
-			System.out.println("Es wurden zu wenig Karten ausgewählt");
-		}
-		for(int i = 1; i <= img.length; i++){
+		int i = 0;
+		for(Entry<Integer, String> card : sv.getCards().entrySet()){
 				try {
-					image = ImageIO.read(img[i]);
-					memCard[i] = new MemoryCard(i, image);
+					image = ImageIO.read(new File(card.getValue()));
+					memCard[i++] = new MemoryCard(card.getKey(), image);
 				} catch (IOException e) {
-					System.out.println("Bilder konnten nicht eingelesen werden!");
+					System.err.println("Bilder konnten nicht eingelesen werden! \"" + card.getValue() + "\"");
 				}
 			}
-		return new Board(memCard, (int)(Math.round(Math.sqrt(img.length))), (int)(Math.round(Math.sqrt(img.length))));
+		return new Board(memCard, sv.getBoardSize().width, sv.getBoardSize().height);
 	}
 
 	@Override
-	public void picked(MemoryCardInterface mc) {
+	public void picked(IMemoryCard mc) {
 		pickCard(mc);
 	}
 }

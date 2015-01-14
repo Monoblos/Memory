@@ -1,6 +1,9 @@
 package de.htwg.memory.entities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Image;
 
@@ -9,6 +12,8 @@ import javax.swing.ImageIcon;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import de.htwg.memory.logic.SettingUtil;
 
 public class MemoryCardTest {
 	MemoryCard memoryCard;
@@ -38,9 +43,13 @@ public class MemoryCardTest {
 		memoryCard.setPicture(value1);
 		assertEquals(value1, memoryCard.getPicture());
 		memoryCard.setPicture(value2);
+		memoryCard.setVisible(true);
 		assertEquals(value2, memoryCard.getPicture());
 		memoryCard.setPicture(null);
 		assertNotNull(memoryCard.getPicture());
+		memoryCard.setSolved(false);
+		memoryCard.setVisible(false);
+		assertEquals(SettingUtil.getHiddenImage(), memoryCard.getPicture());
 	}
 
 	@Test
@@ -90,6 +99,19 @@ public class MemoryCardTest {
 		assertFalse(n.equals(v));
 		assertFalse(n.equals(s));
 		assertTrue(s.equals(v));
+	}
+	
+	@Test
+	public void testPick() {
+		MemoryCardEventListener listener = new MemoryCardEventListener() {
+			@Override
+			public void picked(IMemoryCard mc) {
+				assertEquals(memoryCard, mc);
+			}
+		};
+		memoryCard.addListener(listener);
+		memoryCard.pick();
+		memoryCard.removeListener(listener);
 	}
 	
 	@After

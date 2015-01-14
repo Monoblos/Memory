@@ -134,6 +134,5 @@ public class VirtualConsole {
 		JMenuItem item = new JMenuItem(s);
 		menu.add(item);
 		item.addActionListener(a);
-		
 	}
 }

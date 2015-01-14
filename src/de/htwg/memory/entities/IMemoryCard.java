@@ -1,5 +1,5 @@
 package de.htwg.memory.entities;
 
-public interface MemoryCardInterface {
+public interface IMemoryCard {
 	boolean setVisible(boolean value);
 }

@@ -159,7 +159,6 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 	@Override
 	public void matchMade() {
 		cardToPick = 0;
-		countRounds++;
 		virtualConsole.clear();
 		virtualConsole.println(board);
 		virtualConsole.println();
