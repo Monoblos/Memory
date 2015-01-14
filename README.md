@@ -6,7 +6,7 @@ Memory
     * Enthält Methoden zum Abfragen und Ändern dieser Attribute sowie Methoden zum Vergleich von Memory Karten.
   * Board
     * Die Klasse Board setzt ein Spielbrett mit spezifischer Höhe und Breite und mit Memory Karten auf. 
-      * Sie enthält alle Methoden, die zur Verwaltung der Karten des Spielbrettes, gebraucht werden.
+    * Sie enthält alle Methoden, die zur Verwaltung der Karten des Spielbrettes, gebraucht werden.
   * MemoryCardEventListener
     * Interface dient zur Weiterleitung von Informationen der Klasse MemoryCard an die Klasse Board.
   * MemoryCardInterface
