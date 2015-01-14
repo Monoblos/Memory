@@ -20,14 +20,14 @@ Memory
     * Implementiert die Funktionen von BoardEventListener als leere Funktionen.
     * Erleichtert Anwendung des BoardEventListeners.
   * SettingUtil
-    * Enthält Methoden zum einstellen aller Einstellungen.
+    * Bündelt alle Einstellungen in einer Klasse.
   * Util 
     * Enthält allgemeine, keiner spezifischen Klasse zuordenbare, Methoden.
 
 
 * main 
   * Main
-    * Enthält main Methode zur Ausführung der GUI
+    * Enthält main Methode zur Ausführung der UI
 
 
 * ui
