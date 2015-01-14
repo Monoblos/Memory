@@ -19,7 +19,6 @@ Memory
   * BoardEventAdapter
     * Implementiert die Funktionen von BoardEventListener als leere Funktionen.
     * Erleichtert Anwendung des BoardEventListeners.
-     * 
   * SettingUtil
     * Enthält Methoden zum einstellen aller Einstellungen.
   * Util 
