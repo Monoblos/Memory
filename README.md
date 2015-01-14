@@ -1,6 +1,22 @@
 Memory
 ======
-* Entities
+* main 
+  * Main
+    * Enthält main Methode zur Ausführung der UI
+
+
+* ui
+  * VirtualConsole
+    * Dient zur Darstellung der TUI.
+  * TUI
+    * Öffnet und Verwaltet die textbasierte Benutzeroberfläche. 
+  * MemCardButton
+    * Zur GUI zugehörige Klasse zur Darstellung der Memory Karte.
+  * GUI
+    * Öffnet und Verwaltet die graphische Benutzeroberfläche.  
+
+
+* entities
   * MemoryCard
     * Beinhaltet alle Attribute einer Memory Karte.  
     * Enthält Methoden zum Abfragen und Ändern dieser Attribute sowie Methoden zum Vergleich von Memory Karten.
@@ -23,22 +39,3 @@ Memory
     * Bündelt alle Einstellungen in einer Klasse.
   * Util 
     * Enthält allgemeine, keiner spezifischen Klasse zuordenbare, Methoden.
-
-
-* main 
-  * Main
-    * Enthält main Methode zur Ausführung der UI
-
-
-* ui
-  * VirtualConsole
-    * Dient zur Darstellung der TUI.
-  * TUI
-    * Öffnet und Verwaltet die textbasierte Benutzeroberfläche. 
-  * MemCardButton
-    * Zur GUI zugehörige Klasse zur Darstellung der Memory Karte.
-  * GUI
-    * Öffnet und Verwaltet die graphische Benutzeroberfläche.  
-
-
-    
