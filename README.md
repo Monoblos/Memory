@@ -3,31 +3,36 @@ Memory
 ### 1. Zweck des Projektes
 * Erzeugen eines Memory Spiels für das Fach Software Engineering.
 
-### 2. Der Anwender, der Kunde und andere Verantwortliche.
+### 2. Kunden und andere Beteiligte/Betroffene
 * Frei benutzbar für jeden.
-* Prof. Dr. Marco Boger
+* Unter Leitung von Prof. Dr. Marco Boger
 
-### 3. Benutzer des Produkts
+### 3. Nutzer des Produkts
 * Frei benutzbar für jeden, Partyspiel.
 
-### 4.Obligatorische Beschränkungen
-* Java wird vorrausgesetzt.
-* Am besten getestet auf Windows, sollte auf allen anderen Systemen laufen.
+### 4. Vorgegebene Randbedingungen für das Projekt
+* Programmiersprache: Java oder Skala.
+* Verwaltung mit Scrum und GitHub.
+* Arbeiten in Teams bestehend aus 2 Personen.
 
 ### 5. Namenskonventionen und Definitionen
 * Listener enthalten den Zusatz "Listener".
 * Graphische und Textuelle Oberflächen haben den Namenzusatz "UI".
 *  Adapter haben den Zusatz "Adapter".
 
-### 6. Relevante Daten und Annahmen
+### 6. Relevante Fakten und Annahmen
 *  - 
 
 ### 7. Arbeitsumfang
+* Entwicklung des Memory Spiels.
 * Produktdokumentation.
 * Produktpräsentation.
 
 
-### 8. Produktumfang
+### 8. Abgrenzung des Produkts
+
+
+### 9. Anforderungen an Funktionen und Daten des Produkts
 * Eigene Karten verwenden.
 * Multiplayer.
 * Skalierbare Oberfläche.
@@ -35,22 +40,61 @@ Memory
 * Frei wählbare Größe der Kartensets.
 * Neustartbar.
 
-### 9. Funktionale und Datenanforderungen
-*  Savefile.
 
-### 10. Designaspekte
+### 10. Designaspekte/ Look and Feel
 * Skalierbares Spielbrett.
 * Skalierbare Karten.
 
-### 11. Nutzbarkeit
+### 11. Benutzbarkeitsanforderungen
 * Graphische Oberfläche zum Bedienen des Memory Spiels.
 * Textuelle Oberfläche, falls keine graphischen Oberflächen unterstützt wird.
 
-### 12. Laufzeitanforderungen
+### 12. Performance
 * Reaktionszeiten von < 1 sec.
 
-### 13.Operationale Anforderungen
+### 13. Operationale Anforderungen
 * 
+
+### 14. Wartungs- und Portierungsanforderungen
+* Testen auf anderen Betriebsystemen.
+
+### 15. Zugriffsschutzanforderungen
+* - 
+
+### 16. Kulturelle und politische Anforderungen
+* -
+
+### 17. Rechtliche Anforderungen
+* Lizenz
+
+### 18. Offene Punkte
+* Memory mit "nichtgleichen", zueinandergehörenden Karten.
+
+### 19. Fertiglösungen
+* -
+
+### 20. Neue Probleme
+* -
+
+### 21. Aufgaben
+* Verbesserung des Loggings.
+* Umsetzung vom Punkt "Offene Punkte".
+### 22. Inbetriebnahme und Migration
+
+### 23. Risiken
+* -
+
+### 24. Kosten
+* 
+
+### 25. Benutzerdokumentation und Schulung
+* -
+
+### 26. Warteraum
+* -
+
+### 27. Lösungsideen
+* -
 
 ### Aufbau des Spiels
 * main 
