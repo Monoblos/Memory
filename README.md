@@ -21,7 +21,7 @@ Memory
 *  Adapter haben den Zusatz "Adapter".
 
 ### 6. Relevante Fakten und Annahmen
-*  - 
+* Benutzung eigener Karten durch ein Savefile möglich
 
 ### 7. Arbeitsumfang
 * Entwicklung des Memory Spiels.
@@ -30,7 +30,7 @@ Memory
 
 
 ### 8. Abgrenzung des Produkts
-
+* - 
 
 ### 9. Anforderungen an Funktionen und Daten des Produkts
 * Eigene Karten verwenden.
