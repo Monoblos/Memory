@@ -52,6 +52,7 @@ public class GUI extends JFrame implements BoardEventListener, ActionListener {
 
 		addMenuBar();
 		
+		this.setTitle("Memory");
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
