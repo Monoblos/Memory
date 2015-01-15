@@ -16,7 +16,7 @@ public class SettingUtilTest {
 	
 	@Test
 	public void testGetNumberOfCardsToMatch() {
-		assertEquals(2, SettingUtil.getNumberOfCardsToMatch());
+		assertEquals(3, SettingUtil.getNumberOfCardsToMatch());
 	}
 	
 	@Test

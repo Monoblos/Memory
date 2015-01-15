@@ -76,6 +76,8 @@ public class Board implements MemoryCardEventListener{
 	}
 	
 	public boolean pickCard(int x, int y) {
+		if (memoryCards[x][y] == null)
+			return false;
 		return pickCard(memoryCards[x][y]);
 	}
 	public boolean pickCard(IMemoryCard c) {
@@ -110,7 +112,8 @@ public class Board implements MemoryCardEventListener{
 		boolean isFinished = true;
 		for (int i = 0; i < memoryCards.length && isFinished; i++) {
 			for (int j = 0; j < memoryCards[i].length && isFinished; j++) {
-				isFinished &= getCard(i, j).isSolved();
+				if (memoryCards[i][j] != null)
+					isFinished &= getCard(i, j).isSolved();
 			}
 		}
 		return isFinished;

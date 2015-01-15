@@ -38,6 +38,7 @@ public class MemoryCardTest {
 	public void testGetPicture() {
 		Image value1 = new ImageIcon(new byte[]{0, 1, 2, 3, 4, 5, 6, 7}).getImage();
 		Image value2 = new ImageIcon(new byte[]{3, 1, 3, 2, 5, 1, 3, 7}).getImage();
+		memoryCard.setCardValue(1);
 		memoryCard.setSolved(true);
 		assertNotNull(memoryCard.getPicture());
 		memoryCard.setPicture(value1);
@@ -47,9 +48,6 @@ public class MemoryCardTest {
 		assertEquals(value2, memoryCard.getPicture());
 		memoryCard.setPicture(null);
 		assertNotNull(memoryCard.getPicture());
-		memoryCard.setSolved(false);
-		memoryCard.setVisible(false);
-		assertEquals(SettingUtil.getHiddenImage(), memoryCard.getPicture());
 	}
 
 	@Test
@@ -90,6 +88,7 @@ public class MemoryCardTest {
 
 	@Test
 	public void testToString() {
+		memoryCard.setCardValue(1);
 		String n = memoryCard.toString();
 		memoryCard.setVisible(true);
 		String v = memoryCard.toString();

@@ -39,7 +39,8 @@ public class BoardTest {
 	
 	@Test
 	public void testGetCardCount() {
-		assertEquals(filledBoard.getHeight() * filledBoard.getWidth(), filledBoard.getCardCount());
+		assertEquals(filledBoard.getHeight() * filledBoard.getWidth() / SettingUtil.getNumberOfCardsToMatch()
+				, filledBoard.getCardCount() / SettingUtil.getNumberOfCardsToMatch());
 	}
 	
 	@Test
@@ -51,7 +52,7 @@ public class BoardTest {
 			if (i % SettingUtil.getNumberOfCardsToMatch() != 0) {
 				assertTrue(filledBoard.hasVisibleCard());
 			}
-			while(!filledBoard.pickCard(r.nextInt(4), r.nextInt(4)));
+			while(!filledBoard.pickCard(r.nextInt(filledBoard.getHeight()), r.nextInt(filledBoard.getWidth())));
 		}
 		filledBoard.removeListener(l);
 	}
