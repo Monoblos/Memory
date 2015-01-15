@@ -203,6 +203,7 @@ public class TUI implements Runnable, BoardEventListener, KeyListener, ActionLis
 		}
 		e.consume();
 	}
+	@Override
 	public void actionPerformed(ActionEvent a){
 		this.continueRunning = false;
 		game.interrupt();

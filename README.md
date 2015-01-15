@@ -1,3 +1,14 @@
+# Installation unter Windows
+
+* CMD öffnen und in einem leeren Verzeichnis folgende Befehl ausführen:
+  * git clone "https://github.com/Monoblos/Memory.git"
+  * cd Memory
+  * create.cmd
+  * java -jar Memory.jar
+* Benötigt werden die Programme "Git", "Maven" und "Java"
+* Alle Programme müssen in der System-Variable "PATH" eingetragen sein.
+
+
 Memory
 ======
 ### 1. Zweck des Projektes

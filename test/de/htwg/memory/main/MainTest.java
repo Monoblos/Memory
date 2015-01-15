@@ -8,6 +8,7 @@ public class MainTest {
 
 	@Test
 	public void test() {
+		assertTrue(true);
 	}
 
 }

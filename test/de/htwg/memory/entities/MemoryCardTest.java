@@ -13,8 +13,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.memory.logic.SettingUtil;
-
 public class MemoryCardTest {
 	MemoryCard memoryCard;
 
