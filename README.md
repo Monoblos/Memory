@@ -1,4 +1,6 @@
-# Installation unter Windows
+Memory
+======
+#### Installation unter Windows
 
 * CMD öffnen und in einem leeren Verzeichnis folgende Befehl ausführen:
   * git clone "https://github.com/Monoblos/Memory.git"
@@ -8,9 +10,6 @@
 * Benötigt werden die Programme "Git", "Maven" und "Java"
 * Alle Programme müssen in der System-Variable "PATH" eingetragen sein.
 
-
-Memory
-======
 ### 1. Zweck des Projektes
 * Erzeugen eines Memory Spiels für das Fach Software Engineering.
 
