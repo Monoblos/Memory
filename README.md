@@ -1,8 +1,58 @@
 Memory
 ======
+### 1. Zweck des Projektes
+* Erzeugen eines Memory Spiels für das Fach Software Engineering.
+
+### 2. Der Anwender, der Kunde und andere Verantwortliche.
+* Frei benutzbar für jeden.
+* Prof. Dr. Marco Boger
+
+### 3. Benutzer des Produkts
+* Frei benutzbar für jeden, Partyspiel.
+
+### 4.Obligatorische Beschränkungen
+* Java wird vorrausgesetzt.
+* Am besten getestet auf Windows, sollte auf allen anderen Systemen laufen.
+
+### 5. Namenskonventionen und Definitionen
+* Listener enthalten den Zusatz "Listener".
+* Graphische und Textuelle Oberflächen haben den Namenzusatz "UI".
+*  Adapter haben den Zusatz "Adapter".
+
+### 6. Relevante Daten und Annahmen
+*  - 
+
+### 7. Arbeitsumfang
+* Produktdokumentation.
+* Produktpräsentation.
 
 
-# Aufbau des Spiels
+### 8. Produktumfang
+* Eigene Karten verwenden.
+* Multiplayer.
+* Skalierbare Oberfläche.
+* Beliebige Feldgröße.
+* Frei wählbare Größe der Kartensets.
+* Neustartbar.
+
+### 9. Funktionale und Datenanforderungen
+*  Savefile.
+
+### 10. Designaspekte
+* Skalierbares Spielbrett.
+* Skalierbare Karten.
+
+### 11. Nutzbarkeit
+* Graphische Oberfläche zum Bedienen des Memory Spiels.
+* Textuelle Oberfläche, falls keine graphischen Oberflächen unterstützt wird.
+
+### 12. Laufzeitanforderungen
+* Reaktionszeiten von < 1 sec.
+
+### 13.Operationale Anforderungen
+* 
+
+### Aufbau des Spiels
 * main 
   * Main
     * Enthält main Methode zur Ausführung der UI
