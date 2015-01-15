@@ -1,5 +1,8 @@
 Memory
 ======
+
+
+# Aufbau des Spiels
 * main 
   * Main
     * Enthält main Methode zur Ausführung der UI
