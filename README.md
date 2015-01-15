@@ -1,6 +1,6 @@
 Memory
 ======
-#### Installation unter Windows
+## Installation unter Windows
 
 * CMD öffnen und in einem leeren Verzeichnis folgende Befehl ausführen:
   * git clone "https://github.com/Monoblos/Memory.git"
