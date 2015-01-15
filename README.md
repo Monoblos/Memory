@@ -132,7 +132,7 @@ Memory
     * Sie enthält alle Methoden, die zur Verwaltung der Karten des Spielbrettes, gebraucht werden.
   * MemoryCardEventListener
     * Interface dient zur Weiterleitung von Informationen der Klasse MemoryCard an die Klasse Board.
-  * MemoryCardInterface
+  * IMemoryCard
     * Interface beinhaltet Methode zum setzen der Sichtbarkeit einer Karte.
   
   
