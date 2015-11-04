@@ -20,37 +20,38 @@ import javax.swing.filechooser.FileFilter;
 
 import de.htwg.memory.entities.Board;
 import de.htwg.memory.entities.MemoryCard;
-import de.htwg.memory.logic.BoardEventListener;
+import de.htwg.memory.logic.Controller;
+import de.htwg.memory.logic.UiEventListener;
+import de.htwg.memory.logic.Util;
 
-public class GUI extends JFrame implements BoardEventListener, ActionListener {
+public class GUI extends JFrame implements UiEventListener {
 	private static final long serialVersionUID = -9143205935002378362L;
-	
-	private static final long WAIT_TIME_AFTER_WRONG_MATCH = 500;
 
+	private static class HideAfterTimeout implements Runnable {
+		public void run() {
+			try {
+				Thread.sleep(WAIT_TIME_AFTER_WRONG_MATCH);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Controller.getController().hideWrongMatch();
+		}
+	}
+	
+	private static final long WAIT_TIME_AFTER_WRONG_MATCH = 700;
+
+	private Controller controller;
 	private Board board;
-	private int countRounds;
 	private int players;
-	private int matchPerPlayer[];
 	
 	public GUI() {
-		this(null);
-	}
-	public GUI(MemoryCard[] cards) {
-		this(cards, 4, 4);
-	}
-	public GUI(int width, int height) {
-		this(null, width, height);
-	}
-	public GUI(MemoryCard[] memoryCards, int width, int height) {
-		if (memoryCards != null)
-			this.board = new Board(memoryCards.clone(), width, height);
-		else
-			this.board = new Board(null, width, height);
-		this.players = 1;
-		
-		resetGame();
+		this.controller = Controller.getController();
+		controller.addListener(this);
+		this.board = controller.getBoard();
+		this.players = controller.getPlayerCount();
 
 		addMenuBar();
+		gameReset();
 		
 		this.setTitle("Memory");
 		this.setVisible(true);
@@ -64,11 +65,9 @@ public class GUI extends JFrame implements BoardEventListener, ActionListener {
 		for(MemoryCard mc : board.getMemoryCardIterator()) {
 			this.add(new MemCardButton(mc));
 		}
-		this.getContentPane().invalidate();
 	}
 	
 	private final void setWindowSize() {
-		this.setSize(400, 400);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double screenWidthMultiplikator = (screenSize.getWidth() - 25) / board.getWidth();
 		double screenHeightMultiplikator = (screenSize.getHeight() - 85) / board.getHeight();
@@ -82,33 +81,24 @@ public class GUI extends JFrame implements BoardEventListener, ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Menü");
 		menuBar.add(menu);
+		menu.setFont(Util.getOptimalFont());
 		JMenuItem load = new JMenuItem("Load");
 		menu.add(load);
-		load.addActionListener(this);
+		load.addActionListener(new LoadOptionListener());
+		load.setFont(Util.getOptimalFont());
 		JMenuItem multiplayer = new JMenuItem("Use multiplayer");
 		menu.add(multiplayer);
-		multiplayer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(((JMenuItem)e.getSource()).isSelected()) {
-					players = 1;
-					((JMenuItem)e.getSource()).setSelected(false);
-				} else {
-					String s = JOptionPane.showInputDialog(null, "Enter number of Players", "2");
-					players = Integer.parseInt(s);
-					((JMenuItem)e.getSource()).setSelected(true);
-				}
-				resetGame();
-			}
-		});
+		multiplayer.addActionListener(new MultiplayerOptionListener());
+		multiplayer.setFont(Util.getOptimalFont());
 		JMenuItem restart = new JMenuItem("Restart");
 		menu.add(restart);
 		restart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				resetGame();
+				controller.resetGame();
 			}
 		});
+		restart.setFont(Util.getOptimalFont());
 		JMenuItem exit = new JMenuItem("Exit");
 		menu.add(exit);
 		exit.addActionListener(new ActionListener() {
@@ -117,6 +107,7 @@ public class GUI extends JFrame implements BoardEventListener, ActionListener {
 				System.exit(0);
 			}
 		});
+		exit.setFont(Util.getOptimalFont());
 		this.setJMenuBar(menuBar);
 	}
 
@@ -126,10 +117,10 @@ public class GUI extends JFrame implements BoardEventListener, ActionListener {
 		StringBuilder text = new StringBuilder();
 		text.append("Vitory!");
 		if (players == 1) {
-			text.append("\nNumber of turns: ").append(countRounds);
+			text.append("\nNumber of turns: ").append(controller.getRoundNumber());
 		} else {
 			for (int i = 0; i < players; i++) {
-				text.append("\nMatches Player ").append(i + 1).append(": ").append(matchPerPlayer[i]);
+				text.append("\nMatches Player ").append(i + 1).append(": ").append(controller.getPlayerMatches(i));
 			}
 		}
 		
@@ -139,73 +130,40 @@ public class GUI extends JFrame implements BoardEventListener, ActionListener {
 				text.toString(),
 				"Victory!",
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-			resetGame();
+			controller.resetGame();
 		}
 	}
 	@Override
 	public void matchMade() {
-		matchPerPlayer[countRounds % players]++;
 		this.invalidate();
 		this.repaint();
 	}
 	@Override
-	public void beforeBoardReset() {
+	public void noMatchMade() {
 		this.invalidate();
 		this.repaint();
-		countRounds++;
-		try {
-			Thread.sleep(WAIT_TIME_AFTER_WRONG_MATCH);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		if (players > 1)
-			JOptionPane.showConfirmDialog(this, "Player " + (countRounds % players + 1), "Next Player", JOptionPane.OK_CANCEL_OPTION);
+		new Thread(new HideAfterTimeout()).start();;
 	}
 	@Override
-	public void afterBoardReset() {
+	public void boardNeedsRealod() {
 		this.invalidate();
 		this.repaint();
+	}
+
+	@Override
+	public void boardChanged() {
+		board = controller.getBoard();
+	}
+	@Override
+	public void playerCountChanged(int players) {
+		this.players = players;
 	}
 	
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-	}
-	
-	private final void resetGame() {
-		this.countRounds = 0;
-		this.matchPerPlayer = new int[this.players];
-		this.board.removeListener(this);
-		this.board.reset();
-		this.board.shuffle();
+	public void gameReset() {
 		realoadButtons();
-		this.board.addListener(this);
 		this.invalidate();
 		this.repaint();
 		setWindowSize();
-	}
-	
-	private void load(File f) {
-		this.board.removeListener(this);
-		this.board = Board.load(f);
-		resetGame();
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JFileChooser fileChooser = new JFileChooser("SavedGames");
-		fileChooser.setFileFilter(new FileFilter() {
-			@Override
-			public String getDescription() {
-				return "Game-Files (game.dat)";
-			}
-			
-			@Override
-			public boolean accept(File f) {
-				return f.isDirectory() || f.getName().endsWith("game.dat");
-			}
-		});
-		if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			load(fileChooser.getSelectedFile());
-		}
 	}
 }

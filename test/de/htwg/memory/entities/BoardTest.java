@@ -1,6 +1,9 @@
 package de.htwg.memory.entities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Random;
 
@@ -8,8 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.memory.logic.BoardEventAdapter;
-import de.htwg.memory.logic.BoardEventListener;
+import de.htwg.memory.entities.Board.PickResult;
 import de.htwg.memory.logic.SettingUtil;
 
 public class BoardTest {
@@ -46,15 +48,12 @@ public class BoardTest {
 	@Test
 	public void testInteracting() {
 		Random r = new Random();
-		BoardEventListener l = new BoardEventAdapter();
-		filledBoard.addListener(l);
 		for (int i = 0; !filledBoard.isFinished(); i++) {
 			if (i % SettingUtil.getNumberOfCardsToMatch() != 0) {
 				assertTrue(filledBoard.hasVisibleCard());
 			}
-			while(!filledBoard.pickCard(r.nextInt(filledBoard.getHeight()), r.nextInt(filledBoard.getWidth())));
+			while(filledBoard.pickCard(r.nextInt(filledBoard.getHeight()), r.nextInt(filledBoard.getWidth())) == PickResult.INVALID_CARD);
 		}
-		filledBoard.removeListener(l);
 	}
 	
 	@Test

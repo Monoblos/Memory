@@ -13,13 +13,5 @@ public class TUITest {
 		tui = new TUI();
 	}
 
-	@Test
-	public void testStartStop() {
-		assertFalse(tui.isRunning());
-		tui.startGameThreat();
-		assertTrue(tui.isRunning());
-		tui.endGameThreat();
-		assertFalse(tui.isRunning());
-	}
 
 }

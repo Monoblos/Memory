@@ -76,17 +76,8 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable, IMemoryCar
 	}
 	public void pick() {
 		for(final MemoryCardEventListener listener : listeners) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					listener.picked(getThis());
-				}
-			}).start();
+			listener.picked(this);
 		}
-	}
-	
-	private MemoryCard getThis() {
-		return this;
 	}
 	
 	@Override

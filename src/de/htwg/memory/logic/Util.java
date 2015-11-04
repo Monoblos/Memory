@@ -1,8 +1,11 @@
 package de.htwg.memory.logic;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 public final class Util {
@@ -22,5 +25,15 @@ public final class Util {
 		g.setFont(g.getFont().deriveFont(50f));
 		g.drawChars(s.toCharArray(), 0, s.length(), 25, 75);
 		return i;
+	}
+	
+	private static Font optimalFont = null;
+	public static Font getOptimalFont() {
+		if (optimalFont == null) {
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			double resolutionFactor = screenSize.getWidth() / 1600;
+			optimalFont = new Font("Consolas", Font.PLAIN, (int)(16 * resolutionFactor));
+		}
+		return optimalFont;
 	}
 }

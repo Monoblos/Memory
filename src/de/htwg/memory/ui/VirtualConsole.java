@@ -2,6 +2,7 @@ package de.htwg.memory.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,6 +12,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
+
+import de.htwg.memory.logic.Util;
 
 public class VirtualConsole {
 	private static final class ForKeyWaiter implements KeyListener {
@@ -54,17 +57,22 @@ public class VirtualConsole {
 	private ForKeyWaiter k = new ForKeyWaiter();
 
 	public VirtualConsole() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double resolutionFactor = screenSize.getWidth() / 1600;
 		frame = new JFrame();
 		frame.setLayout(new BorderLayout());
 		frame.setTitle("Virtual Console");
 		text = new JTextArea();
 		text.addKeyListener(k);
+		text.setFont(Util.getOptimalFont());
 		frame.add(text, BorderLayout.CENTER);
-		frame.setMinimumSize(new Dimension(600, 300));
+		frame.setMinimumSize(new Dimension((int)(600 * resolutionFactor), (int)(300 * resolutionFactor)));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menu = new JMenu("Menü");
+		menu.setFont(Util.getOptimalFont());
 		menuBar = new JMenuBar();
 		menuBar.add(menu);
+		menuBar.setFont(Util.getOptimalFont());
 		frame.add(menuBar, BorderLayout.BEFORE_FIRST_LINE);
 		frame.setVisible(true);
 	}
@@ -110,15 +118,20 @@ public class VirtualConsole {
 		}
 		
 		k.arm();
-		synchronized (k.synchronizer) {
-			while (!k.synchronizer.ready) {
-				k.synchronizer.wait();
+		try {
+			synchronized (k.synchronizer) {
+				while (!k.synchronizer.ready) {
+					k.synchronizer.wait();
+				}
 			}
-		}
-
-		for (KeyListener l : oldListeners) {
-			if (l != k) {
-				text.addKeyListener(l);
+		} finally {
+			synchronized (k.synchronizer) {
+				k.synchronizer.ready = true;
+			}
+			for (KeyListener l : oldListeners) {
+				if (l != k) {
+					text.addKeyListener(l);
+				}
 			}
 		}
 	}
@@ -132,6 +145,7 @@ public class VirtualConsole {
 	}
 	public void addMenueItem(ActionListener a, String s){
 		JMenuItem item = new JMenuItem(s);
+		item.setFont(Util.getOptimalFont());
 		menu.add(item);
 		item.addActionListener(a);
 	}

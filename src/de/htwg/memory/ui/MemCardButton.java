@@ -37,12 +37,6 @@ public class MemCardButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//Picking card's can result in wait times, as this should not affect the UI we do it in a extra thread.
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				card.pick();
-			}
-		}).start();
+		card.pick();
 	}
 }
