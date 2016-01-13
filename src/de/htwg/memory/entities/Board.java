@@ -6,7 +6,6 @@ import java.util.Random;
 
 import de.htwg.memory.logic.Controller;
 import de.htwg.memory.logic.SettingUtil;
-import de.htwg.memory.ui.MemCardButton;
 
 public class Board {
 	public enum PickResult {

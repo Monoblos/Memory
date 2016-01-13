@@ -146,6 +146,10 @@ public class Controller implements MemoryCardEventListener {
 		return players;
 	}
 	
+	public int getCurrentPlayer() {
+		return (getRoundNumber() % getPlayerCount()) + 1;
+	}
+	
 	public void setPlayerCount(int players) {
 		this.players = players;
 		firePlayerCountChanged(this.players);
@@ -161,7 +165,10 @@ public class Controller implements MemoryCardEventListener {
 	}
 	
 	public int getPlayerMatches(int playerId) {
-		return matchPerPlayer[playerId];
+		if (playerId < players)
+			return matchPerPlayer[playerId];
+		else
+			return -1;
 	}
 	
 	private void fireWin() {

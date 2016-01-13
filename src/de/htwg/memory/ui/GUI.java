@@ -1,22 +1,19 @@
 package de.htwg.memory.ui;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.BorderFactory;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileFilter;
 
 import de.htwg.memory.entities.Board;
 import de.htwg.memory.entities.MemoryCard;
@@ -135,19 +132,36 @@ public class GUI extends JFrame implements UiEventListener {
 	}
 	@Override
 	public void matchMade() {
-		this.invalidate();
-		this.repaint();
+		reload();
 	}
 	@Override
 	public void noMatchMade() {
-		this.invalidate();
-		this.repaint();
-		new Thread(new HideAfterTimeout()).start();;
+		reload();
+		if (players == 1)
+			new Thread(new HideAfterTimeout()).start();
+		else {
+			JOptionPane.showMessageDialog(this,
+					"It's the turn of player " + controller.getCurrentPlayer(),
+					"Next Player.",
+					JOptionPane.INFORMATION_MESSAGE);
+			Controller.getController().hideWrongMatch();
+		}
 	}
 	@Override
 	public void boardNeedsRealod() {
-		this.invalidate();
-		this.repaint();
+		reload();
+	}
+	
+	private void reload() {
+    	invalidate();
+	    EventQueue.invokeLater(new Runnable()
+	    {
+	        public void run()
+	        {
+	            repaint();
+	            setVisible(true);
+	        }
+	    });
 	}
 
 	@Override
@@ -162,8 +176,6 @@ public class GUI extends JFrame implements UiEventListener {
 	@Override
 	public void gameReset() {
 		realoadButtons();
-		this.invalidate();
-		this.repaint();
 		setWindowSize();
 	}
 }
