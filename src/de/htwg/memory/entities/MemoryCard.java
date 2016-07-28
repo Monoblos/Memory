@@ -2,6 +2,7 @@ package de.htwg.memory.entities;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -69,10 +70,15 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable, IMemoryCar
 	}
 	
 	public void addListener(MemoryCardEventListener listener) {
+		if (listener == null)
+			return;
 		listeners.add(listener);
 	}
 	public void removeListener(MemoryCardEventListener listener) {
 		listeners.remove(listener);
+	}
+	public List<MemoryCardEventListener> getListeners() {
+		return new ArrayList<MemoryCardEventListener>(listeners);
 	}
 	public void pick() {
 		for(final MemoryCardEventListener listener : listeners) {
@@ -91,7 +97,7 @@ public class MemoryCard implements Comparable<MemoryCard>, Cloneable, IMemoryCar
 	@Override
 	public String toString() {
 		if (cardValue == 0)
-			return " X ";
+			return " _ ";
 		if (visible || solved) {
 			return " " + String.valueOf(cardValue) + " ";
 		}

@@ -47,10 +47,12 @@ public class Controller implements MemoryCardEventListener {
 		return singelton;
 	}
 	
+	public static Controller getNewController() {
+		return new Controller();
+	}
+	
 	public void loadBoard(File gameFile) {
 		SaveFile sv = new SaveFile(gameFile);
-		
-		SettingUtil.setNumberOfCardsToMatch(sv.getCardsToMatch());
 		
 		MemoryCard[] memCard = new MemoryCard[sv.getCards().size()];
 		BufferedImage image = null;
@@ -58,17 +60,18 @@ public class Controller implements MemoryCardEventListener {
 		for(Entry<Integer, String> card : sv.getCards().entrySet()){
 			try {
 				image = ImageIO.read(new File(card.getValue()));
-				memCard[i++] = new MemoryCard(card.getKey(), image);
+				memCard[i] = new MemoryCard(card.getKey(), image);
+				memCard[i++].addListener(this);
 			} catch (IOException e) {
 				System.err.println("Bilder konnten nicht eingelesen werden! \"" + card.getValue() + "\"");
 			}
 		}
 		
-		replaceBoard(new Board(memCard, sv.getBoardSize().width, sv.getBoardSize().height));
+		replaceBoard(new Board(memCard, sv.getBoardSize().width, sv.getBoardSize().height, sv.getCardsToMatch(), this));
 	}
 	
 	public void loadStaticBoard(int width, int height) {
-		replaceBoard(new Board(null, width, height));
+		replaceBoard(new Board(null, width, height, 2, this));
 	}
 	
 	private void replaceBoard(Board newBoard) {
@@ -127,7 +130,7 @@ public class Controller implements MemoryCardEventListener {
 		} else if (result == PickResult.TOO_LESS_CARDS) {
 			fireBoardNeedsReload();
 		} else if (result == PickResult.MATCH_MADE) {
-			matchPerPlayer[countRounds % players]++;
+			matchPerPlayer[getCurrentPlayer() - 1]++;
 			if (board.isFinished()) {
 				fireWin();
 			} else {
@@ -147,11 +150,14 @@ public class Controller implements MemoryCardEventListener {
 	}
 	
 	public int getCurrentPlayer() {
-		return (getRoundNumber() % getPlayerCount()) + 1;
+		if (getPlayerCount() > 0)
+			return (getRoundNumber() % getPlayerCount()) + 1;
+		return -1;
 	}
 	
 	public void setPlayerCount(int players) {
 		this.players = players;
+		this.matchPerPlayer = new int[players];
 		firePlayerCountChanged(this.players);
 		resetGame();
 	}
@@ -167,8 +173,7 @@ public class Controller implements MemoryCardEventListener {
 	public int getPlayerMatches(int playerId) {
 		if (playerId < players)
 			return matchPerPlayer[playerId];
-		else
-			return -1;
+		return -1;
 	}
 	
 	private void fireWin() {

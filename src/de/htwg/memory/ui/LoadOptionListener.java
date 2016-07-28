@@ -11,6 +11,12 @@ import javax.swing.filechooser.FileFilter;
 import de.htwg.memory.logic.Controller;
 
 public class LoadOptionListener implements ActionListener {
+	final Controller c;
+	
+	public LoadOptionListener(Controller c) {
+		this.c = c;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fileChooser = new JFileChooser("SavedGames");
@@ -26,7 +32,7 @@ public class LoadOptionListener implements ActionListener {
 			}
 		});
 		if (fileChooser.showOpenDialog((JComponent)e.getSource()) == JFileChooser.APPROVE_OPTION) {
-			Controller.getController().loadBoard(fileChooser.getSelectedFile());
+			c.loadBoard(fileChooser.getSelectedFile());
 		}
 	}
 

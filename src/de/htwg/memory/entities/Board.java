@@ -2,10 +2,8 @@ package de.htwg.memory.entities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
-
-import de.htwg.memory.logic.Controller;
-import de.htwg.memory.logic.SettingUtil;
 
 public class Board {
 	public enum PickResult {
@@ -18,20 +16,23 @@ public class Board {
 	
 	private MemoryCard[][] memoryCards;
 	private int cardCount;
+	private int cardsToMatch;
 	
-	public Board(MemoryCard[] memoryCards, int width, int height) {
+	public Board(MemoryCard[] memoryCards, int width, int height, int cardsToMatch, MemoryCardEventListener controller) {
 		MemoryCard[] cards = memoryCards;
 		this.memoryCards = new MemoryCard[height][width];
+		this.cardsToMatch = cardsToMatch;
 		cardCount = 0;
 		
 		if(cards == null) {
-			cards = new MemoryCard[width * height / SettingUtil.getNumberOfCardsToMatch()];
-			for (int i = 0; i < width * height / SettingUtil.getNumberOfCardsToMatch(); i++) {
+			cards = new MemoryCard[width * height / cardsToMatch];
+			for (int i = 0; i < width * height / cardsToMatch; i++) {
 				cards[i] = new MemoryCard(i + 1);
+				cards[i].addListener(controller);
 			}
 		}
 		
-		for (int i = 0; i < width * height / SettingUtil.getNumberOfCardsToMatch() && i < cards.length; i++) {
+		for (int i = 0; i < width * height / cardsToMatch && i < cards.length; i++) {
 			addCardPair(cards[i]);
 		}
 	}
@@ -48,17 +49,23 @@ public class Board {
 	public int getHeight() {
 		return memoryCards.length;
 	}
+	public int getCardsToMatch() {
+		return cardsToMatch;
+	}
 	
 	public final void addCardPair(MemoryCard card) {
 		if (card == null) {
 			throw new NullPointerException("Can't add null Memory Cards");
 		}
-		if (cardCount + SettingUtil.getNumberOfCardsToMatch() > getWidth() * getHeight()) {
+		List<MemoryCardEventListener> listeners = card.getListeners();
+
+		if (cardCount + cardsToMatch > getWidth() * getHeight()) {
 			throw new IndexOutOfBoundsException("Board has reached maximum number of cards");
 		}
-		for (int i = 0; i < SettingUtil.getNumberOfCardsToMatch(); i++) {
+		for (int i = 0; i < cardsToMatch; i++) {
 			this.memoryCards[cardCount / getWidth()][cardCount % getWidth()] = card.clone();
-			this.memoryCards[cardCount / getWidth()][cardCount % getWidth()].addListener(Controller.getController());
+			for (MemoryCardEventListener listener : listeners)
+				this.memoryCards[cardCount / getWidth()][cardCount % getWidth()].addListener(listener);
 			cardCount++;
 		}
 	}
@@ -95,7 +102,7 @@ public class Board {
 		return isFinished;
 	}
 	
-	private MemoryCard getCard(int x, int y) {
+	public MemoryCard getCard(int x, int y) {
 		if (memoryCards[x][y] != null) {
 			return memoryCards[x][y];
 		} else {
@@ -106,9 +113,9 @@ public class Board {
 	public PickResult updateMatchings() {
 		MemoryCard foundCards[] = getChoosenCards();
 		
-		if (foundCards.length < SettingUtil.getNumberOfCardsToMatch()) {
+		if (foundCards.length < cardsToMatch) {
 			return PickResult.TOO_LESS_CARDS;
-		} else if (foundCards.length > SettingUtil.getNumberOfCardsToMatch()) {
+		} else if (foundCards.length > cardsToMatch) {
 			return PickResult.TOO_MANY_CARDS;
 		}
 		
@@ -188,7 +195,7 @@ public class Board {
 				if (memoryCards[i][j] != null)
 					sb.append(memoryCards[i][j]).append(" ");
 				else
-					sb.append(" X  ");
+					sb.append("_ ");
 			}
 			sb.append("\n");
 		}

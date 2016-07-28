@@ -9,17 +9,23 @@ import javax.swing.JOptionPane;
 import de.htwg.memory.logic.Controller;
 
 public class MultiplayerOptionListener implements ActionListener {
+	final Controller c;
+	
+	public MultiplayerOptionListener(Controller c) {
+		this.c = c;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JMenuItem src = (JMenuItem)e.getSource();
 		if(src.isSelected()) {
-			Controller.getController().setPlayerCount(1);
+			c.setPlayerCount(1);
 			src.setSelected(false);
 		} else {
 			String s = JOptionPane.showInputDialog(null, "Enter number of Players", "2");
 			if (s == null) // Canceled
 				return;
-			Controller.getController().setPlayerCount(Integer.parseInt(s));
+			c.setPlayerCount(Integer.parseInt(s));
 			src.setSelected(true);
 		}
 	}

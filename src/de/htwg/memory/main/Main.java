@@ -19,10 +19,10 @@ public final class Main {
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i];
 			if (arg.equalsIgnoreCase("-t") || arg.equalsIgnoreCase("--tui")) {
-				new TUI();
+				new TUI(c);
 				someUiStartet = true;
 			} else if (arg.equalsIgnoreCase("-g") || arg.equalsIgnoreCase("--gui")) {
-				new GUI();
+				new GUI(c);
 				someUiStartet = true;
 			} else if (arg.equalsIgnoreCase("-b") || arg.equalsIgnoreCase("--board")) {
 				if (args.length > i + 2) {
@@ -43,7 +43,7 @@ public final class Main {
 		}
 		
 		if (!someUiStartet) {
-			new TUI();
+			new TUI(c);
 		}
 	}
 }

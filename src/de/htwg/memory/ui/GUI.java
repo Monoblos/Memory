@@ -24,14 +24,14 @@ import de.htwg.memory.logic.Util;
 public class GUI extends JFrame implements UiEventListener {
 	private static final long serialVersionUID = -9143205935002378362L;
 
-	private static class HideAfterTimeout implements Runnable {
+	private class HideAfterTimeout implements Runnable {
 		public void run() {
 			try {
 				Thread.sleep(WAIT_TIME_AFTER_WRONG_MATCH);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			Controller.getController().hideWrongMatch();
+			controller.hideWrongMatch();
 		}
 	}
 	
@@ -41,8 +41,8 @@ public class GUI extends JFrame implements UiEventListener {
 	private Board board;
 	private int players;
 	
-	public GUI() {
-		this.controller = Controller.getController();
+	public GUI(Controller c) {
+		this.controller = c;
 		controller.addListener(this);
 		this.board = controller.getBoard();
 		this.players = controller.getPlayerCount();
@@ -81,11 +81,11 @@ public class GUI extends JFrame implements UiEventListener {
 		menu.setFont(Util.getOptimalFont());
 		JMenuItem load = new JMenuItem("Load");
 		menu.add(load);
-		load.addActionListener(new LoadOptionListener());
+		load.addActionListener(new LoadOptionListener(controller));
 		load.setFont(Util.getOptimalFont());
 		JMenuItem multiplayer = new JMenuItem("Use multiplayer");
 		menu.add(multiplayer);
-		multiplayer.addActionListener(new MultiplayerOptionListener());
+		multiplayer.addActionListener(new MultiplayerOptionListener(controller));
 		multiplayer.setFont(Util.getOptimalFont());
 		JMenuItem restart = new JMenuItem("Restart");
 		menu.add(restart);
@@ -144,7 +144,7 @@ public class GUI extends JFrame implements UiEventListener {
 					"It's the turn of player " + controller.getCurrentPlayer(),
 					"Next Player.",
 					JOptionPane.INFORMATION_MESSAGE);
-			Controller.getController().hideWrongMatch();
+			controller.hideWrongMatch();
 		}
 	}
 	@Override

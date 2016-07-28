@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.LinkedList;
-import java.util.List;
 
 import de.htwg.memory.entities.Board;
 import de.htwg.memory.logic.Controller;
@@ -19,8 +17,8 @@ public class TUI implements UiEventListener, KeyListener {
 	private int selectedRow;
 	private boolean waitingForKey;
 	
-	public TUI() {
-		this.controller = Controller.getController();
+	public TUI(Controller c) {
+		this.controller = c;
 		gameReset();
 
 		virtualConsole = new VirtualConsole();
